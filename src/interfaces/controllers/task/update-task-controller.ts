@@ -4,7 +4,11 @@ import { UpdateTaskUseCase } from '@usecases/task/update-task-use-case';
 import { UpdateTaskDTO } from '@domain/dtos/task/update-task-dto';
 
 export class UpdateTaskController {
-    static async update(req: Request, res: Response): Promise<Response> {
+    constructor(
+        private readonly updateTaskUseCase: UpdateTaskUseCase
+    ) {}
+
+    async update(req: Request, res: Response): Promise<Response> {
         try {
             const taskId = req.params.id;
             const taskData = UpdateTaskController.extractTaskData(req.body);
@@ -13,7 +17,7 @@ export class UpdateTaskController {
                 return res.status(400).json({ message: 'At least one field must be provided to update the task.' });
             }
 
-            const updatedTask = await UpdateTaskController.updateTask(taskId, taskData);
+            const updatedTask = await this.updateTaskUseCase.execute(Number(taskId), taskData);
             
             if (!updatedTask) {
                 return res.status(404).json({ message: 'Failed to update task' });
@@ -36,12 +40,5 @@ export class UpdateTaskController {
         if (status !== undefined) taskData.status = status;
 
         return taskData;
-    }
-
-    private static async updateTask(taskId: string, taskData: Partial<UpdateTaskDTO>) {
-        const taskRepository = new PrismaTaskRepository();
-        const updateTaskUseCase = new UpdateTaskUseCase(taskRepository);
-
-        return await updateTaskUseCase.execute(Number(taskId), taskData);
     }
 }
