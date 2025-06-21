@@ -7,7 +7,7 @@ const swaggerConfig = {
     info: {
       title: "Scraper Mailer API",
       version: "0.1.0",
-      description: "REST API for automation, data scraping, and user management, including official journal and military information handling.",
+      description: "NexoTask API Project: A RESTful API for task management, including full CRUD operations and user authentication. Built with Node.js and TypeScript, using Prisma for database access and JWT for secure authentication.",
     },
     components: {
       securitySchemes: {
