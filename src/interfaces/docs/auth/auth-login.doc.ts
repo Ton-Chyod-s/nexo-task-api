@@ -1,21 +1,17 @@
 
-export const authRegisterDoc = {
-  '/register': {
+export const authLoginDoc = {
+  '/login': {
     post: {
       tags: ['Auth'],
-      summary: 'Register a new user',
-      description: 'Endpoint to register a new user in the system.',
+      summary: 'Login',
+      description: 'Login to the application',
+      operationId: 'login',
       requestBody: {
-        required: true,
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
-                nome: {
-                  type: 'string',
-                  description: 'Name of the user',
-                },
                 email: {
                   type: 'string',
                   format: 'email',
@@ -25,38 +21,34 @@ export const authRegisterDoc = {
                   type: 'string',
                   description: 'Password for the user account',
                 },
-                confirmSenha: {
-                  type: 'string',
-                  description: 'Confirmation of the user password',
                 },
-              },
-              required: ['nome', 'email', 'senha', 'confirmSenha'],
+                required: ['email', 'senha'],
+                },
             },
           },
         },
-      },
       responses: {
-        201: {
-          description: 'User registered successfully',
+        200: {
+          description: 'Login successful',
           content: {
             'application/json': {
               schema: {
                 type: 'object',
                 properties: {
-                  message: {
+                  token: {
                     type: 'string',
-                    example: 'User registered successfully.',
+                    description: 'JWT token for authenticated user',
                   },
                 },
               },
             },
           },
         },
-        400: {
-          description: 'Bad Request - Invalid input data',
+        401: {
+          description: 'Unauthorized - Invalid credentials',
         },
         500: {
-          description: 'Internal Server Error - Registration failed',
+          description: 'Internal Server Error - Login failed',
         },
       },
     },
