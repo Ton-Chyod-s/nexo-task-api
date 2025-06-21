@@ -20,4 +20,6 @@ export const mockUserRepository: IUserRepository = {
   create: vi.fn().mockResolvedValue(mockUser),
   findByName: vi.fn(),
   findByEmail: vi.fn(),
+  save: vi.fn(),
+  findByResetToken: vi.fn(),
 };

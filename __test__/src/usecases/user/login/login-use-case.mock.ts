@@ -25,6 +25,8 @@ export async function setupMocks() {
     findByName: vi.fn().mockResolvedValue(user),
     create: vi.fn(),
     findByEmail: vi.fn(),
+    save: vi.fn(),
+    findByResetToken: vi.fn(),
   };
 
   mockAuthService = {

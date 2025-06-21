@@ -17,7 +17,11 @@ export class LoginUseCase {
         const passwordMatches = await bcrypt.compare(password, user.passwordHash);
         if (!passwordMatches) return null;
 
-        const token = this.authService.generateToken(user.id?.toString() || "");
+        if (!user.id) {
+            throw new Error("User account is inactive");
+        }
+        
+        const token = this.authService.generateToken(user.id.toString());
 
         return {
             id: user.id?.toString() || "",
