@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { HomeController } from './../controllers/home-controller';
-import { RegisterController } from './../controllers/user/register-controller';
-import { LoginController } from './../controllers/user/login-controller';
-import { authenticateToken } from './../middlewares/auth-middleware';
-import { CreateTaskController } from './../controllers/task/create-controller';
-import { ReadAllTaskController } from './../controllers/task/read-controller';
-import { UpdateTaskController } from './../controllers/task/update-task-controller';
-import { ForgotPasswordController } from '../controllers/user/auth/forgot-password-controller';
-import { ForgotPasswordUseCase } from '../../usecases/user/auth/ForgotPasswordUseCase';
-import { PrismaUserRepository } from '../../infrastructure/repositories/user-repositories';
-import { NodemailerService } from '../../infrastructure/services/NodemailerService';
-import { ResetPasswordUseCase } from '../../usecases/user/auth/ResetPasswordUseCase';
-import { ResetPasswordController } from '../controllers/user/auth/reset-password-controller';
+import { HomeController } from '@interfaces/controllers/home-controller';
+import { RegisterController } from '@interfaces/controllers/user/register-controller';
+import { LoginController } from '@interfaces/controllers/user/login-controller';
+import { authenticateToken } from '@interfaces/middlewares/auth-middleware';
+import { CreateTaskController } from '@interfaces/controllers/task/create-controller';
+import { ReadAllTaskController } from '@interfaces/controllers/task/read-controller';
+import { UpdateTaskController } from '@interfaces/controllers/task/update-task-controller';
+import { ForgotPasswordController } from '@interfaces/controllers/user/auth/forgot-password-controller';
+import { ForgotPasswordUseCase } from '@usecases/user/auth/ForgotPasswordUseCase';
+import { PrismaUserRepository } from '@infrastructure/repositories/user-repositories';
+import { NodemailerService } from '@infrastructure/services/NodemailerService';
+import { ResetPasswordUseCase } from '@usecases/user/auth/ResetPasswordUseCase';
+import { ResetPasswordController } from '@interfaces/controllers/user/auth/reset-password-controller';
 
 export const router  = Router();
 

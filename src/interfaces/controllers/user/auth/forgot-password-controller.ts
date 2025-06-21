@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ForgotPasswordUseCase } from "../../../../usecases/user/auth/ForgotPasswordUseCase";
+import { ForgotPasswordUseCase } from "@usecases/user/auth/ForgotPasswordUseCase";
 
 export class ForgotPasswordController {
   constructor(private forgotPasswordUseCase: ForgotPasswordUseCase) {}

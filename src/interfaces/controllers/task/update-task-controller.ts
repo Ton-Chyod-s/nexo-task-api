@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { PrismaTaskRepository } from '../../../infrastructure/repositories/task-repositories';
-import { UpdateTaskUseCase } from '../../../usecases/task/update-task-use-case';
-import { UpdateTaskDTO } from 'src/domain/dtos/task/update-task-dto';
+import { PrismaTaskRepository } from '@infrastructure/repositories/task-repositories';
+import { UpdateTaskUseCase } from '@usecases/task/update-task-use-case';
+import { UpdateTaskDTO } from '@domain/dtos/task/update-task-dto';
 
 export class UpdateTaskController {
     static async update(req: Request, res: Response) {

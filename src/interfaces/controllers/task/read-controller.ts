@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaTaskRepository } from "../../../infrastructure/repositories/task-repositories";
-import { ReadAllTaskUseCase } from "../../../usecases/task/read-all-use-case";
+import { PrismaTaskRepository } from "@infrastructure/repositories/task-repositories";
+import { ReadAllTaskUseCase } from "@usecases/task/read-all-use-case";
 
 
 export class ReadAllTaskController {

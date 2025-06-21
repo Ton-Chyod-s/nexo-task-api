@@ -1,4 +1,4 @@
-import { IUserRepository } from "../../../domain/repositories/user-repository";
+import { IUserRepository } from "@domain/repositories/user-repository";
 import bcrypt from "bcryptjs";
 
 export class ResetPasswordUseCase {

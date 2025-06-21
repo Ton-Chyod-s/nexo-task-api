@@ -1,5 +1,5 @@
-import { IUserRepository } from "../../../domain/repositories/user-repository";
-import { IMailerService } from "../../../domain/services/mailer-service";
+import { IUserRepository } from "@domain/repositories/user-repository";
+import { IMailerService } from "@domain/services/mailer-service";
 import crypto from "crypto";
 require('dotenv').config({ path: '.env' });
 

@@ -1,6 +1,6 @@
 import { PrismaClient, Tarefa } from "@prisma/client";
-import { ITaskRepository } from "../../domain/repositories/task-repository";
-import { CreateTaskDTO } from "../../domain/dtos/task/create-task-dto";
+import { ITaskRepository } from "@domain/repositories/task-repository";
+import { CreateTaskDTO } from "@domain/dtos/task/create-task-dto";
 
 const prisma = new PrismaClient();
 

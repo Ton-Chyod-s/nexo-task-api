@@ -1,5 +1,5 @@
-import { Task } from "src/domain/entities/task";
-import { ITaskRepository } from "src/domain/repositories/task-repository";
+import { Task } from "@domain/entities/task";
+import { ITaskRepository } from "@domain/repositories/task-repository";
 
 
 export class ReadAllTaskUseCase {

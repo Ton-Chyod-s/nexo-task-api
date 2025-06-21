@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { router } from '../interfaces/http/route';
+import { router } from '@interfaces/http/route';
 import swaggerUi from "swagger-ui-express";
 import cors from 'cors';
 
