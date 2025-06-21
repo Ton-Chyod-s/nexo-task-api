@@ -3,7 +3,7 @@ import { PrismaUserRepository } from "@infrastructure/repositories/user-reposito
 import { LoginUseCase } from "@usecases/user/login-use-case";
 
 export class LoginController {
-    static async login(req: Request, res: Response) {
+    static async login(req: Request, res: Response): Promise<Response> {
         const { email, senha } = req.body;
 
         if (!email || !senha) {

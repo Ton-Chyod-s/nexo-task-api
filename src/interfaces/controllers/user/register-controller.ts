@@ -6,7 +6,7 @@ import { hashPassword } from "@utils/password-generator";
 import { UsuarioDTO } from "@domain/dtos/user/register-request-dto";
 
 export class RegisterController {
-    static async register(req: Request, res: Response) {
+    static async register(req: Request, res: Response): Promise<Response> {
         const dados: UsuarioDTO = req.body;
 
         if (dados.senha !== dados.confirmSenha) {

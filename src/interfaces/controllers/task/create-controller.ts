@@ -3,7 +3,7 @@ import { CreateTaskUseCase } from "@usecases/task/create-use-case";
 import { PrismaTaskRepository } from "@infrastructure/repositories/task-repositories";
 
 export class CreateTaskController {
-    static async create(req: Request, res: Response) {
+    static async create(req: Request, res: Response): Promise<Response> {
         const { titulo, descricao, dataPrevista, prioridade } = req.body;
         
         if (!titulo || !descricao || !dataPrevista || !prioridade) {

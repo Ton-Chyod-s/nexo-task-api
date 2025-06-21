@@ -4,7 +4,7 @@ import { UpdateTaskUseCase } from '@usecases/task/update-task-use-case';
 import { UpdateTaskDTO } from '@domain/dtos/task/update-task-dto';
 
 export class UpdateTaskController {
-    static async update(req: Request, res: Response) {
+    static async update(req: Request, res: Response): Promise<Response> {
         try {
             const taskId = req.params.id;
             const taskData = UpdateTaskController.extractTaskData(req.body);

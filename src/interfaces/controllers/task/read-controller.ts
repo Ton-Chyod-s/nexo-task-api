@@ -4,7 +4,7 @@ import { ReadAllTaskUseCase } from "@usecases/task/read-all-use-case";
 
 
 export class ReadAllTaskController {
-    static async getAllTasks(req: Request, res: Response) {
+    static async getAllTasks(req: Request, res: Response): Promise<Response> {
         const taskRepository = new PrismaTaskRepository(); 
         const getAllTaskUseCase = new ReadAllTaskUseCase(taskRepository);
         
