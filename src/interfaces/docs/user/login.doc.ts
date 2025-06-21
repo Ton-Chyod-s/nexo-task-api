@@ -2,7 +2,7 @@
 export const authLoginDoc = {
   '/login': {
     post: {
-      tags: ['Auth'],
+      tags: ['User'],
       summary: 'Login',
       description: 'Login to the application',
       operationId: 'login',

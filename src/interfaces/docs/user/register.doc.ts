@@ -2,7 +2,7 @@
 export const authRegisterDoc = {
   '/register': {
     post: {
-      tags: ['Auth'],
+      tags: ['User'],
       summary: 'Register a new user',
       description: 'Endpoint to register a new user in the system.',
       requestBody: {
