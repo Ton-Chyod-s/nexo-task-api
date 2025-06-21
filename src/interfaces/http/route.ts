@@ -15,7 +15,7 @@ import { ResetPasswordController } from '@interfaces/controllers/user/auth/reset
 
 export const router  = Router();
 
-router.get('/', (req, res) => HomeController.welcome(req, res));    
+// router.get('/', (req, res) => HomeController.welcome(req, res));    
 
 router.post('/register', async (req, res) => {
     await RegisterController.register(req, res);
