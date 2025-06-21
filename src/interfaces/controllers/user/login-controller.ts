@@ -1,20 +1,21 @@
 import { Request, Response } from "express";
-import { PrismaUserRepository } from "@infrastructure/repositories/user-repositories";
 import { LoginUseCase } from "@usecases/user/login-use-case";
 
 export class LoginController {
-    static async login(req: Request, res: Response): Promise<Response> {
+    constructor(
+        private readonly loginUseCase: LoginUseCase
+    ) {}
+    
+    async login(req: Request, res: Response): Promise<Response> {
         const { email, senha } = req.body;
 
         if (!email || !senha) {
             return res.status(400).json({ message: "Email and password are required" });
         }
 
-        const userRepository = new PrismaUserRepository();
-        const loginUseCase = new LoginUseCase(userRepository);
-        
+
         try {
-            const result = await loginUseCase.execute(email, senha);
+            const result = await this.loginUseCase.execute(email, senha);
 
             if (!result) {
                 return res.status(401).json({ message: "Invalid credentials" });
