@@ -4,7 +4,7 @@ import { factories } from './factories';
 
 export const router  = Router();
 
-// authentication middleware
+// reset password controllers
 const forgotPasswordController = factories.makeForgotPasswordController();
 const resetPasswordController = factories.makeResetPasswordController();
 // user controllers
