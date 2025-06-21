@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
     await Controllers.loginController.login(req, res);
 });
 
-router.post('/task', authenticateToken, async (req, res) => {
+router.post('/tasks', authenticateToken, async (req, res) => {
     await Controllers.createTaskController.create(req, res);
 });
 
