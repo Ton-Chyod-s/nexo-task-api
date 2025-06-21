@@ -69,4 +69,51 @@ export const taskUpdateDoc = {
             },
         },
 
+        delete: {
+            tags: ['Tasks'],
+            summary: 'Delete Task',
+            description: 'Delete an existing task for the authenticated user',
+            operationId: 'deleteTask',
+            security: [
+                {
+                    bearerAuth: [],
+                }
+            ],
+            parameters: [
+                {
+                    name: 'id',
+                    in: 'path',
+                    required: true,
+                    schema: {
+                        type: 'string'
+                    },
+                    description: 'ID of the task to delete',
+                }
+            ],
+            responses: {
+                200: {
+                    description: 'Task deleted successfully',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    success: { type: 'string', example: 'Task deleted' },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad Request - Invalid task ID provided',
+                },
+                404: {
+                    description: 'Not Found - Task not found',
+                },
+                500: {
+                    description: 'Internal Server Error - Failed to delete task',
+                },
+            },
+        },
+
 }}
