@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
 import { CreateUseCase } from "@usecases/user/create-use-case";
-import { PrismaUserRepository } from "@infrastructure/repositories/user-repositories";
 import { AuthService } from "@infrastructure/jwt/auth-service";
 import { hashPassword } from "@utils/password-generator";
 import { UsuarioDTO } from "@domain/dtos/user/register-request-dto";
 
 export class RegisterController {
-    static async register(req: Request, res: Response): Promise<Response> {
+    constructor(
+        private readonly createUseCase: CreateUseCase,
+        private readonly authService: AuthService
+    ) {}
+
+    async register(req: Request, res: Response): Promise<Response> {
         const dados: UsuarioDTO = req.body;
 
         if (dados.senha !== dados.confirmSenha) {
@@ -24,12 +28,9 @@ export class RegisterController {
         }
         
         try {
-            const userRepository = new PrismaUserRepository();
-            const createUser = new CreateUseCase(userRepository);
-            const user = await createUser.execute({ nome: dados.nome, email: dados.email, passwordHash: hashedPassword });
+            const user = await this.createUseCase.execute({ nome: dados.nome, email: dados.email, passwordHash: hashedPassword });
             
-            const authService = new AuthService();
-            const token = authService.generateToken(user.id?.toString() || "");
+            const token = this.authService.generateToken(user.id?.toString() || "");
  
             return res.status(201).json({
                 message: "User registered successfully",
