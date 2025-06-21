@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ResetPasswordUseCase } from "../../../../usecases/user/auth/ResetPasswordUseCase";
+import { ResetPasswordUseCase } from "@usecases/user/auth/ResetPasswordUseCase";
 
 export class ResetPasswordController {
   constructor(private resetPasswordUseCase: ResetPasswordUseCase) {}

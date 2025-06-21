@@ -1,6 +1,6 @@
 import { Tarefa } from "@prisma/client";
-import { UpdateTaskDTO } from "../../domain/dtos/task/update-task-dto";
-import { ITaskRepository } from "../../domain/repositories/task-repository";
+import { UpdateTaskDTO } from "@domain/dtos/task/update-task-dto";
+import { ITaskRepository } from "@domain/repositories/task-repository";
 
 
 export class UpdateTaskUseCase {

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import { IUserRepository } from "../../domain/repositories/user-repository";
-import { AuthService } from "../../infrastructure/jwt/auth-service";
-import { LoginResponseDTO } from "../../domain/dtos/user/login-response-dto";
+import { IUserRepository } from "@domain/repositories/user-repository";
+import { AuthService } from "@infrastructure/jwt/auth-service";
+import { LoginResponseDTO } from "@domain/dtos/user/login-response-dto";
 
 export class LoginUseCase {
     constructor(

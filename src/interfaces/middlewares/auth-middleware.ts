@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthService } from '../../infrastructure/jwt/auth-service';
+import { AuthService } from '@infrastructure/jwt/auth-service';
 
 const authService = new AuthService();
 
-export function authenticateToken(req: Request, res: Response, next: NextFunction): void {
+export function     authenticateToken(req: Request, res: Response, next: NextFunction): void {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 

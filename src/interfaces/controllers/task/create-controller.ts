@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CreateTaskUseCase } from "../../../usecases/task/create-use-case";
-import { PrismaTaskRepository } from "../../../infrastructure/repositories/task-repositories";
+import { CreateTaskUseCase } from "@usecases/task/create-use-case";
+import { PrismaTaskRepository } from "@infrastructure/repositories/task-repositories";
 
 export class CreateTaskController {
     static async create(req: Request, res: Response) {

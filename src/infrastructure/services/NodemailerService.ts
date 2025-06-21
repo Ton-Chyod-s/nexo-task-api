@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { IMailerService } from "../../domain/services/mailer-service";
+import { IMailerService } from "@domain/services/mailer-service";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 require('dotenv').config({ path: '.env' });
