@@ -25,7 +25,7 @@ const swaggerConfig = {
     ],
     paths: swaggerPaths,
   },
-  apis: ["./src/interfaces/routes/*.ts"],
+  apis: ["./src/interfaces/http/*.ts"],
 };
 
 export const swaggerSpec = swaggerJSDoc(swaggerConfig);
