@@ -44,4 +44,3 @@ router.get('/tasks', authenticateToken, async (req, res) => {
 router.put('/task/:id', authenticateToken, async (req, res) => {
      await updateTaskController.update(req, res);
 });
-
