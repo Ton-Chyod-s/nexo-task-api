@@ -1,4 +1,5 @@
 import { makeCreateController } from "./controllers/task/create-controller";
+import { makeDeleteTaskController } from "./controllers/task/delete-task-controller";
 import { makeReadController } from "./controllers/task/read-controller";
 import { makeUpdateTaskController } from "./controllers/task/update-task-controller";
 import { makeForgotPasswordController } from "./controllers/user/auth/forgot-password-controller.factory";
@@ -15,5 +16,6 @@ export const factories = {
   makeLoginController,
   makeCreateController,
   makeUpdateTaskController,
-  makeReadController
+  makeReadController,
+  makeDeleteTaskController
 }

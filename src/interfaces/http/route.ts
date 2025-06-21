@@ -14,6 +14,7 @@ const loginController = factories.makeLoginController();
 const createTaskController = factories.makeCreateController();
 const updateTaskController = factories.makeUpdateTaskController();
 const readAllTaskController = factories.makeReadController();
+const deleteTaskController = factories.makeDeleteTaskController();
 
 // public routes
 router.post('/register', async (req, res) => {
@@ -43,4 +44,8 @@ router.get('/tasks', authenticateToken, async (req, res) => {
 
 router.put('/task/:id', authenticateToken, async (req, res) => {
      await updateTaskController.update(req, res);
+});
+
+router.delete('/task/:id', authenticateToken, async (req, res) => {
+    await deleteTaskController.delete(req, res);
 });
