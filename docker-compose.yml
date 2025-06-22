@@ -34,5 +34,19 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
 
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    env_file:
+      - ./front/.env
+
+    container_name: front_container
+    ports:
+      - "${PORT:-3002}:${PORT:-3002}"
+    depends_on:
+      - api
+      - db
+      
 volumes:
   pgdata:
