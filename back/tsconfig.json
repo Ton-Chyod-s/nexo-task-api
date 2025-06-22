@@ -6,11 +6,11 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",  
-    "rootDir": "./src",
-    "baseUrl": "src",  
+    "rootDir": "back/src",
+    "baseUrl": "back/src",  
     "typeRoots": [
       "./node_modules/@types", 
-      "./types"
+      "back/types"
     ],
     "paths": {
       "@infrastructure/*": ["infrastructure/*"],
@@ -22,8 +22,8 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "types/**/*.d.ts"
+    "back/src/**/*.ts",
+    "back/types/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
