@@ -1,14 +1,14 @@
 {
-  "name": "jubileutasklistapi",
+  "name": "nexo-task-api",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/Chyod-s/JubileuTaskListAPI#readme",
+  "homepage": "https://github.com/Ton-Chyod-s/nexo-task-api#readme",
   "bugs": {
-    "url": "https://github.com/Chyod-s/JubileuTaskListAPI/issues"
+    "url": "https://github.com/Ton-Chyod-s/nexo-task-api/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chyod-s/JubileuTaskListAPI.git"
+    "url": "git+https://github.com/Ton-Chyod-s/nexo-task-api.git"
   },
   "license": "ISC",
   "author": "",
