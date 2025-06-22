@@ -15,11 +15,23 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "dev": "cross-env DATABASE_URL=${DATABASE_URL_DEV} prisma db push --schema=./prisma/schema.dev.prisma && prisma generate --schema=./prisma/schema.dev.prisma && nodemon --exec ts-node -r tsconfig-paths/register src/main/server.ts",
-    "start": "node dist/main/server.js",
+    "dev": "npx prisma db seed && nodemon --exec ts-node -r tsconfig-paths/register src/main/server.ts",
+    "start": "npx prisma migrate deploy && node -r module-alias/register dist/main/server.js",
     "build": "rimraf dist && tsc",
+    "deploy": "npm run build && docker-compose down && docker-compose up -d --build",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
+  },
+  "_moduleAliases": {
+    "@infrastructure": "dist/infrastructure",
+    "@interfaces": "dist/interfaces",
+    "@usecases": "dist/usecases",
+    "@domain": "dist/domain",
+    "@utils": "dist/utils",
+    "@main": "dist/main"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
@@ -31,6 +43,7 @@
     "dotenv-safe": "^9.1.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "nodemailer": "^7.0.3",
     "nodemon": "^3.1.10",
     "swagger-jsdoc": "^6.2.8",
@@ -46,12 +59,11 @@
     "@types/nodemailer": "^6.4.17",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
-    "@vitest/coverage-c8": "^0.33.0",
     "prisma": "^6.7.0",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
-    "vitest": "^0.30.0"
+    "vitest": "^3.2.4"
   }
 }

@@ -6,13 +6,16 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/.prisma/client"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  previewFeatures = ["referentialIntegrity"]
+}
+
+generator seed {
+  provider = "ts-node"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL_PROD")
+  url      = env("DATABASE_URL")
 }
 
 enum Prioridade {

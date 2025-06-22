@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { hashPassword } from '../../../src/utils/password-generator'; // Ajuste o caminho conforme necessário
+import { hashPassword } from '../../../../src/utils/password-generator'; // Ajuste o caminho conforme necessário
 import bcrypt from 'bcrypt';
 
 describe('hashPassword', () => {
