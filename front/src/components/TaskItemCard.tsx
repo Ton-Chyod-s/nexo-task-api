@@ -11,7 +11,7 @@ export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardP
   const [starOn, setStarOn] = useState(isFavorite);
 
   return (
-    <div className={`rounded-b-md shadow-md p-4 w-full max-w-sm ${color}`}>
+    <div className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${color}`}>
       <header className="flex justify-between items-center mb-3">
         <input
           type="text"
