@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Pencil, Droplet }  from "lucide-react";
+import { X, Pencil, Droplet, Star, StarOff } from "lucide-react";
 
 type TaskItemCardProps = {
   title: string;
@@ -26,29 +26,32 @@ export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardP
           className="ml-2 text-yellow-500"
           aria-label={starOn ? "Desfavoritar" : "Favoritar"}
         >
-          {starOn ? "⭐" : "☆"}
+          {starOn ? (
+            <Star className="w-5 h-5 fill-yellow-500" />
+          ) : (
+            <StarOff className="w-5 h-5" />
+          )}
         </button>
       </header>
 
-      <p className="text-sm text-gray-600 pb-50">
+      <p className="text-sm text-gray-600 mb-64">
         Clique ou arraste o arquivo para esta área para fazer upload
       </p>
 
       <footer className="flex justify-between items-center mt-6 text-lg">
-      <div className="flex gap-3">
-        <button title="Editar">
-          <Pencil className="w-5 h-5 text-gray-600" />
-        </button>
-        <button title="Cor">
-          <Droplet className="w-5 h-5 text-gray-600" />
-        </button>
-      </div>
+        <div className="flex gap-3">
+          <button title="Editar">
+            <Pencil className="w-5 h-5 text-gray-600" />
+          </button>
+          <button title="Cor">
+            <Droplet className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
 
-      <button title="Excluir">
-        <X className="w-5 h-5" />
-      </button>
-    </footer>
-
+        <button title="Excluir">
+          <X className="w-5 h-5 text-gray-600" />
+        </button>
+      </footer>
     </div>
   );
 }
