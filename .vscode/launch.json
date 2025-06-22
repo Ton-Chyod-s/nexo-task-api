@@ -23,7 +23,7 @@
       "name": "Debug React (Frontend)",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:5173",
+      "url": "http://localhost:3001",
       "webRoot": "${workspaceFolder}/front/src",
       "sourceMaps": true,
       "smartStep": true
