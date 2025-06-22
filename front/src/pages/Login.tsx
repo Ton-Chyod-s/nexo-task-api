@@ -41,7 +41,7 @@ export default function Login() {
 
           setTimeout(() => {
             navigate("/dashboard", { replace: true });
-          }, 1000);
+          }, 300);
         } else {
           window.alert("Falha no login. Verifique suas credenciais.");
         }
