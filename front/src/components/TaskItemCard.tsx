@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { X } from "lucide-react";
 
 type TaskItemCardProps = {
   title: string;
@@ -36,7 +37,9 @@ export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardP
       <footer className="flex justify-between items-center mt-6 text-lg">
         <button title="Editar">✏️</button>
         <button title="Anexar">📁</button>
-        <button title="Excluir">❌</button>
+        <button title="Excluir">
+          <X className="w-5 h-5" />
+        </button>
       </footer>
     </div>
   );
