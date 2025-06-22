@@ -12,11 +12,12 @@ export default function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Cadastro com:", form);
-    // Aqui você chama sua API
+    
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Cadastro</h2>
         <InputField label="Nome" name="name" value={form.name} onChange={handleChange} />
@@ -30,6 +31,7 @@ export default function Register() {
           Já tem conta? <Link to="/login" className="text-green-600 hover:underline">Entrar</Link>
         </p>
       </form>
+      
     </div>
   );
 }
