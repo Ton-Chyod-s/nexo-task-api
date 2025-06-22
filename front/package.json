@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:css": "npx tailwindcss -c tailwind.config.js -i ./src/index.css -o ./src/output.css --watch",
+    "dev:css": "npx tailwindcss -c tailwind.config.js -i ./src/assets/styles/index.css -o ./src/assets/styles/output.css --watch",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.10",
+    "lucide-react": "^0.522.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
