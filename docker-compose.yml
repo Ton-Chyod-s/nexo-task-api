@@ -2,13 +2,15 @@ version: '3.8'
 services:
   api:
     build:
-      context: .
+      context: ./back
       dockerfile: Dockerfile
-    container_name: api_container
-    ports:
-      - "${PORT}:${PORT}"
+
     env_file:
-      - .env
+      - ./back/.env
+
+    container_name: api_container_test
+    ports:
+      - "${PORT:-3001}:${PORT:-3001}"
     depends_on:
       - db
     environment:
@@ -16,15 +18,12 @@ services:
       - DATABASE_URL=${DATABASE_URL_PROD}
     restart: always
     command: >
-      /bin/sh -c "wait-for-it db:5432 --
-      && rm -rf prisma/migrations prisma/migration_lock.toml   
-      && npx prisma generate 
-      && npx prisma migrate dev --name init 
+      /bin/sh -c "wait-for-it db:5432 -- 
       && npm start"
 
   db:
     image: postgres
-    container_name: postgres_container
+    container_name: postgres_container_test
     environment:
       POSTGRES_USER: megaJunior
       POSTGRES_PASSWORD: 123
