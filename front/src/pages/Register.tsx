@@ -1,9 +1,10 @@
 import { useState } from "react";
 import InputField from "../components/InputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -53,8 +54,13 @@ export default function Register() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Cadastro realizado com sucesso:", data);
-        window.alert("Cadastro realizado com sucesso!");
+        
+        sessionStorage.setItem("token", data.token);
+
+        setTimeout(() => {
+            navigate("/dashboard", { replace: true });
+          }, 1000);
+        
       } else {
         window.alert("Falha no cadastro. Verifique seus dados.");
       } 
