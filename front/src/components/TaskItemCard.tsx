@@ -5,21 +5,18 @@ type TaskItemCardProps = {
   title: string;
   isFavorite: boolean;
   color: string;
+  body?: string;
 };
 
-export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardProps) {
-  const [currentTitle, setCurrentTitle] = useState(title);
+export default function TaskItemCard({ title, isFavorite, color, body }: TaskItemCardProps) {
   const [starOn, setStarOn] = useState(isFavorite);
 
   return (
     <div className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${color}`}>
       <header className="flex justify-between items-center mb-3">
-        <input
-          type="text"
-          value={currentTitle}
-          onChange={(e) => setCurrentTitle(e.target.value)}
+        <p
           className="flex-grow bg-transparent text-lg font-bold focus:outline-none border-b border-gray-300 pb-1"
-        />
+        >{title}</p>
         <button
           type="button"
           onClick={() => setStarOn(!starOn)}
@@ -35,7 +32,7 @@ export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardP
       </header>
 
       <p className="text-sm text-gray-600 mb-64">
-        Clique ou arraste o arquivo para esta área para fazer upload
+        {body || "Nenhuma descrição fornecida."}
       </p>
 
       <footer className="flex justify-between items-center mt-6 text-lg">
