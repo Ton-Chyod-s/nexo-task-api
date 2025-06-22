@@ -10,7 +10,7 @@
     "baseUrl": "src",  
     "typeRoots": [
       "./node_modules/@types", 
-      "back/types"
+      "./types"
     ],
     "paths": {
       "@infrastructure/*": ["infrastructure/*"],
