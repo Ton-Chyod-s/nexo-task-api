@@ -31,15 +31,15 @@ export default function SearchHeader() {
   const clearSearch = () => setSearch("");
 
   return (
-    <header className="bg-white shadow flex items-center justify-between px-4 py-5">
+    <header className="bg-white shadow flex items-center justify-between px-2 py-4">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <img src="/logo.png" alt="Logo" className="w-6 h-6" />
         <span className="font-semibold text-gray-700">CoreNotes</span>
       </div>
 
-      {/* Campo de busca */}
-      <div className="flex flex-1 max-w-xl mx-8">
+  
+      <div className="flex flex-1 ml-10 mr-10 md:mr-96">
         <input
           type="text"
           placeholder="Pesquisar notas"
@@ -62,7 +62,7 @@ export default function SearchHeader() {
         </button>
 
         <button
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 hover:text-gray-700 mr-4"
           onClick={sair}
         >
           sair
