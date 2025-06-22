@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Star, StarOff } from "lucide-react";
 
 export default function TaskCard() {
-  const [title, setTitle] = useState("Título");
   const [search, setSearch] = useState("");
   const [starOn, setStarOn] = useState(false);
 
@@ -16,8 +15,7 @@ export default function TaskCard() {
       <header className="mb-4 flex items-center">
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Título"
           className="flex-grow pb-2 pl-5 mt-1 border-b border-gray-300 text-xl font-semibold focus:border-blue-600 outline-none"
         />
         <button
