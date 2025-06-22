@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SearchHeader() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -33,8 +34,8 @@ export default function SearchHeader() {
   return (
     <header className="bg-white shadow flex items-center justify-between px-2 py-4">
       {/* Logo */}
-      <div className="flex items-center gap-2">
-        <img src="/logo.png" alt="Logo" className="w-6 h-6" />
+      <div className="flex items-center gap-2 ml-5">
+        <img src="./assets/img/logo.png" alt="Logo" className="w-6 h-6" />
         <span className="font-semibold text-gray-700">CoreNotes</span>
       </div>
 
