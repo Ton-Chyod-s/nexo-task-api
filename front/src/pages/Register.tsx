@@ -12,8 +12,57 @@ export default function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Cadastro com:", form);
+    if (
+      !form.name ||
+      !form.email ||
+      !form.password ||
+      !form.confirmPassword
+    ) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      alert("As senhas não coincidem.");
+      return;
+    }
+
+    fetchRegister();
     
   };
+
+  async function fetchRegister() {
+    try {
+      const response = await fetch("http://localhost:3002/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: form.name,
+          email: form.email,
+          senha: form.password,
+          confirmSenha: form.confirmPassword,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Erro no cadastro");
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Cadastro realizado com sucesso:", data);
+        window.alert("Cadastro realizado com sucesso!");
+      } else {
+        window.alert("Falha no cadastro. Verifique seus dados.");
+      } 
+    } catch (error) {
+      console.error("Erro ao fazer cadastro:", error);
+      window.alert("Ocorreu um erro ao tentar fazer cadastro. Tente novamente mais tarde.");
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -31,7 +80,7 @@ export default function Register() {
           Já tem conta? <Link to="/login" className="text-green-600 hover:underline">Entrar</Link>
         </p>
       </form>
-      
+
     </div>
   );
 }
