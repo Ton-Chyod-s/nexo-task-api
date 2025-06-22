@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { X, Pencil, Droplet }  from "lucide-react";
 
 type TaskItemCardProps = {
   title: string;
@@ -35,12 +35,20 @@ export default function TaskItemCard({ title, isFavorite, color }: TaskItemCardP
       </p>
 
       <footer className="flex justify-between items-center mt-6 text-lg">
-        <button title="Editar">✏️</button>
-        <button title="Anexar">📁</button>
-        <button title="Excluir">
-          <X className="w-5 h-5" />
+      <div className="flex gap-3">
+        <button title="Editar">
+          <Pencil className="w-5 h-5 text-gray-600" />
         </button>
-      </footer>
+        <button title="Cor">
+          <Droplet className="w-5 h-5 text-gray-600" />
+        </button>
+      </div>
+
+      <button title="Excluir">
+        <X className="w-5 h-5" />
+      </button>
+    </footer>
+
     </div>
   );
 }
