@@ -9,8 +9,8 @@ export default function SearchHeader() {
  
   async function handleSearch(event: React.FormEvent) {
     event.preventDefault();
-    console.log("Buscando notas com o termo:", search);
-  }
+    window.alert("Buscando notas com o termo: " + search);
+  } 
 
   async function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Enter") {
@@ -40,16 +40,42 @@ export default function SearchHeader() {
       </div>
 
   
-      <div className="flex flex-1 ml-10 mr-10 md:mr-96">
+      <div className="flex flex-1 ml-10 mr-10 md:mr-96 relative">
+        {/* Botão lupa */}
+        <button
+          type="button"
+          onClick={() => handleSearch(new Event('submit') as any)}
+          aria-label="Buscar notas"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"
+            />
+          </svg>
+        </button>
+
         <input
           type="text"
           placeholder="Pesquisar notas"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full px-4 py-1 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+          className="w-full pl-10 pr-10 py-1 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
         />
       </div>
+
+
+      {/* Botão de busca */}
 
       {/* Botões */}
       <div className="flex justify-end gap-4">
