@@ -6,8 +6,8 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",  
-    "rootDir": "back/src",
-    "baseUrl": "back/src",  
+    "rootDir": "./src",
+    "baseUrl": "src",  
     "typeRoots": [
       "./node_modules/@types", 
       "back/types"
@@ -22,8 +22,8 @@
     }
   },
   "include": [
-    "back/src/**/*.ts",
-    "back/types/**/*.d.ts"
+    "src/**/*.ts",
+    "types/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
