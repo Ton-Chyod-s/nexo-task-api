@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import { Link } from "react-router-dom";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,6 +22,7 @@ export default function Register() {
         <InputField label="Nome" name="name" value={form.name} onChange={handleChange} />
         <InputField label="Email" name="email" value={form.email} onChange={handleChange} />
         <InputField label="Senha" name="password" type="password" value={form.password} onChange={handleChange} />
+        <InputField label="Confirmar Senha" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} />
         <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-700">
           Criar conta
         </button>
