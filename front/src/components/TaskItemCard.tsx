@@ -12,7 +12,8 @@ type TaskItemCardProps = {
   onDelete?: () => void;
   onStatusChange?: (newStatus: boolean) => void;
   priority?: "Alta" | "Média" | "Baixa";
-  date?: string; // Ex: '2025-06-24 07:00'
+  date?: string; 
+  onColorChange?: (color: string) => void;
 };
 
 const fetchDeleteTask = async (id: string, token: string) => {
@@ -43,7 +44,8 @@ export default function TaskItemCard({
   onDelete,
   onStatusChange,
   priority,
-  date
+  date,
+  onColorChange
 }: TaskItemCardProps) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -139,8 +141,10 @@ export default function TaskItemCard({
           onClose={() => setIsModalOpen(false)}
           onSelect={(color) => {
             setCardColor(color);
+            onColorChange?.(color);
             setIsModalOpen(false);
           }}
+          id={Number(id)}
         />
       )}
     </>

@@ -19,7 +19,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   const [dataPrevista, setDataPrevista] = useState(() =>
     new Date().toISOString().split("T")[0]
   ); 
-  const [cor, setCor] = useState("#ffffff");
+  const [cor, setCor] = useState("bg-white");
 
   const cardRef = useRef<HTMLDivElement>(null);
 

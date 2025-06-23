@@ -11,7 +11,7 @@ export default function Dashboard() {
     if (!dataIso) return "Sem data";
     const data = new Date(dataIso);
     return data.toLocaleString("pt-BR", {
-      timeZone: "America/Sao_Paulo",
+      timeZone: "America/Campo_Grande",
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
@@ -25,9 +25,9 @@ export default function Dashboard() {
     titulo: string;
     descricao?: string;
     status: boolean;
-    color?: string;
+    cor?: string;
     prioridade?: "Alta" | "Média" | "Baixa";
-    dataPrevista?: string; // Ex: '2025-06-24 07:00'
+    dataPrevista?: string; 
   }
 
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -121,12 +121,19 @@ export default function Dashboard() {
                   id={`${task.id}`}
                   title={task.titulo}
                   isFavorite={task.status}
-                  color={task.color || "bg-white"}
+                  color={task.cor || "bg-white"}
                   body={task.descricao}
                   onDelete={fetchTasks}
                   onStatusChange={(newStatus) => fetchPutTaskStatus(task.id, newStatus)}
-                  priority={task.prioridade} // fallback padrão
-                  date={formatarDataBr(task.dataPrevista) || "Sem data"} // fallback padrão
+                  priority={task.prioridade} 
+                  date={formatarDataBr(task.dataPrevista) || "Sem data"}
+                  onColorChange={(color) => {
+                    setTasks(prev =>
+                      prev.map(item =>
+                        item.id === task.id ? { ...item, cor: color } : item
+                      )
+                    );
+                  }}
                 />
               ))
           )}
