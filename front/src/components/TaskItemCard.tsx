@@ -10,13 +10,14 @@ type TaskItemCardProps = {
   color: string;
   body?: string;
   onDelete?: () => void;
+  onStatusChange?: (newStatus: boolean) => void;
 };
 
 const fetchDeleteTask = async (id: string, token: string) => {
   const numericId = Number(id);
   if (isNaN(numericId)) throw new Error("ID inválido");
 
-  const response = await fetch(`http://localhost:3002/task/${numericId}`, { 
+  const response = await fetch(`http://localhost:3002/task/${numericId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -38,6 +39,7 @@ export default function TaskItemCard({
   color,
   body,
   onDelete,
+  onStatusChange,
 }: TaskItemCardProps) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -65,6 +67,12 @@ export default function TaskItemCard({
     }
   };
 
+  const handleToggleStar = () => {
+    const newStatus = !starOn;
+    setStarOn(newStatus);
+    onStatusChange?.(newStatus);
+  };
+
   return (
     <>
       <div
@@ -77,7 +85,7 @@ export default function TaskItemCard({
           </p>
           <button
             type="button"
-            onClick={() => setStarOn(!starOn)}
+            onClick={handleToggleStar}
             className="ml-2 text-yellow-500"
           >
             {starOn ? (
