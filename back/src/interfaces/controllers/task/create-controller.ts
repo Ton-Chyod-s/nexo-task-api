@@ -1,5 +1,5 @@
-    import { Request, Response } from "express";
-    import { CreateTaskUseCase } from "@usecases/task/create-use-case";
+import { Request, Response } from "express";
+import { CreateTaskUseCase } from "@usecases/task/create-use-case";
 import { postGresToDate } from "@utils/dateUtil";
 
     export class CreateTaskController {
@@ -8,7 +8,7 @@ import { postGresToDate } from "@utils/dateUtil";
         ) {}
 
         async create(req: Request, res: Response): Promise<Response> {
-            let { titulo, descricao, dataPrevista, prioridade, status } = req.body;
+            let { titulo, descricao, dataPrevista, prioridade, status, cor } = req.body;
             
             if (!titulo || !descricao || !dataPrevista || !prioridade || typeof status !== "boolean") {
                 return res.status(400).json({ message: "All fields are required" });
@@ -29,7 +29,8 @@ import { postGresToDate } from "@utils/dateUtil";
                     dataPrevista,
                     prioridade,
                     status,
-                    usuarioId: Number(usuarioId)
+                    usuarioId: Number(usuarioId),
+                    cor
                 });
 
                 return res.status(201).json({ message: "Task successfully created!", task });

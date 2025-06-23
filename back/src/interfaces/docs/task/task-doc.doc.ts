@@ -50,6 +50,7 @@ export const taskDoc = {
                 dataPrevista: { type: 'string', format: 'date-time', description: 'Due date for the task' },
                 prioridade: {type: 'string', enum: ['BAIXA', 'MEDIA', 'ALTA'], description: 'Priority of the task' },
                 status: { type: 'boolean', description: 'Completion status of the task' },
+                cor: { type: 'string', description: 'Color associated with the task' },
               },
               required: ['title'],
             },

@@ -6,11 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
-}
-
-generator seed {
-  provider = "ts-node"
 }
 
 datasource db {
@@ -34,6 +29,7 @@ model Tarefa {
   createdAt    DateTime  @default(now())
   usuario      Usuario   @relation(fields: [usuarioId], references: [id])
   usuarioId    Int
+  cor          String?
 }
 
 model Usuario {
