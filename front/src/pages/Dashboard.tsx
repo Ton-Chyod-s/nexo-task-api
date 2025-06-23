@@ -71,6 +71,7 @@ export default function Dashboard() {
                 isFavorite={task.status}
                 color={task.color || "bg-white"}
                 body={task.descricao}
+                onDelete={fetchTasks}
               />
             ))
         )}
