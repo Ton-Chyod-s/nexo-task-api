@@ -92,7 +92,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   return (
     <div
       ref={cardRef}
-      className="bg-white shadow-md rounded w-[90%] sm:w-1/2 mx-auto p-4"
+      className="bg-white shadow-md rounded w-[90%] sm:w-2/5 mx-auto p-4"
     >
       <form onKeyDown={handleKeyDown}>
         <header className="mb-4 flex items-center gap-3">
@@ -125,7 +125,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
           placeholder="Descrição da tarefa"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full pb-5 pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
+          className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
         />
 
         <div className="flex justify-center items-center gap-4 mt-4 text-sm text-gray-600">
