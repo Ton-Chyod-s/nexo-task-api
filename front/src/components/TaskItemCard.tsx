@@ -4,20 +4,21 @@ import ColorPickerModal from "../components/ColorPickerModal";
 
 
 type TaskItemCardProps = {
+  id: string;
   title: string;
   isFavorite: boolean;
   color: string;
   body?: string;
 };
 
-export default function TaskItemCard({ title, isFavorite, color, body }: TaskItemCardProps) {
+export default function TaskItemCard({ id, title, isFavorite, color, body }: TaskItemCardProps) {
   const [starOn, setStarOn] = useState(isFavorite);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardColor, setCardColor] = useState(color);
 
   return (
     <>
-      <div className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor}`}>
+      <div id={id} className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor}`}>
         <header className="flex justify-between items-center mb-3">
           <p className="flex-grow bg-transparent text-lg font-bold border-b border-gray-300 pb-1">
             {title}

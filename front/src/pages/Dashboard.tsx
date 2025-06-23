@@ -66,7 +66,7 @@ export default function Dashboard() {
             .sort((a, b) => (b.status === true ? 1 : 0) - (a.status === true ? 1 : 0))
             .map((task) => (
               <TaskItemCard
-                key={task.id}
+                id={`${task.id}`}
                 title={task.titulo}
                 isFavorite={task.status}
                 color={task.color || "bg-white"}
