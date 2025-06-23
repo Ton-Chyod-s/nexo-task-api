@@ -16,6 +16,7 @@ export default function Dashboard() {
   }
 
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [search, setSearch] = useState("");
 
   async function fetchPutTaskStatus(id: number, status: boolean) {
     const token = sessionStorage.getItem("token");
@@ -79,9 +80,13 @@ export default function Dashboard() {
     fetchTasks();
   }, [navigate]);
 
+  const filteredTasks = tasks.filter((task) =>
+    task.titulo.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <SearchHeader />
+      <SearchHeader search={search} setSearch={setSearch} />
 
       <main className="w-full flex flex-col items-center mx-auto">
         <div className="p-4 flex items-center justify-between w-full">
@@ -92,7 +97,7 @@ export default function Dashboard() {
           {tasks.length === 0 ? (
             <p className="text-gray-500">Nenhuma tarefa cadastrada</p>
           ) : (
-            tasks
+            filteredTasks
               .slice()
               .sort((a, b) => (b.status === true ? 1 : 0) - (a.status === true ? 1 : 0))
               .map((task) => (

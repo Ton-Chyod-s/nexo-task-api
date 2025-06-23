@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { X, Search, FileText } from "lucide-react";
+import { X, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchHeader() {
-  const [search, setSearch] = useState("");
+type SearchHeaderProps = {
+  search: string;
+  setSearch: (value: string) => void;
+};
+
+export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
   const navigate = useNavigate();
 
   async function handleSearch(event: React.FormEvent | any) {
     event.preventDefault?.();
-    window.alert("Buscando notas com o termo: " + search);
   }
 
   async function handleKeyDown(event: React.KeyboardEvent) {
@@ -20,11 +22,7 @@ export default function SearchHeader() {
 
   async function sair() {
     sessionStorage.removeItem("token");
-
-    setTimeout(() => {
-      navigate("/login", { replace: true });
-    }, 250);
-
+    setTimeout(() => navigate("/login", { replace: true }), 250);
     console.log("Saindo da sessão");
   }
 
@@ -32,15 +30,11 @@ export default function SearchHeader() {
 
   return (
     <header className="bg-white shadow flex items-center justify-between px-2 py-4">
-      {/* Logo com ícone FileText */}
       <div className="flex items-center gap-2 ml-5 text-gray-700">
-        <FileText size={24} />
         <span className="font-semibold">CoreNotes</span>
       </div>
 
-      {/* Busca */}
       <div className="flex flex-1 ml-10 mr-10 md:mr-96 relative">
-        {/* Botão lupa usando o ícone Search */}
         <button
           type="button"
           onClick={handleSearch}
@@ -60,7 +54,6 @@ export default function SearchHeader() {
         />
       </div>
 
-      {/* Botões de limpar e sair */}
       <div className="flex justify-end gap-4">
         <button
           className="text-gray-500 hover:text-gray-700"
