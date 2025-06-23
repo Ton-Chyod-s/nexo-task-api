@@ -2,16 +2,24 @@ import { Star, StarOff, Flag, Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+type Prioridade = "ALTA" | "MEDIA" | "BAIXA";
+
 type TaskCardProps = {
   onTaskCreated?: () => void;
 };
 
 export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [starOn, setStarOn] = useState(false);
   const [starTouched, setStarTouched] = useState(false);
+  const [prioridade, setPrioridade] = useState<Prioridade>("MEDIA");
+  const [dataPrevista, setDataPrevista] = useState(() =>
+    new Date().toISOString().split("T")[0]
+  ); 
+
   const cardRef = useRef<HTMLDivElement>(null);
 
   async function handleCreateTask(): Promise<void> {
@@ -27,8 +35,8 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
     const taskPayload = {
       titulo: title,
       descricao: description,
-      dataPrevista: new Date().toISOString(),
-      prioridade: "MEDIA",
+      dataPrevista,
+      prioridade,
       status: starTouched ? starOn : false,
     };
 
@@ -48,9 +56,10 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       setDescription("");
       setStarOn(false);
       setStarTouched(false);
+      setPrioridade("MEDIA");
+      setDataPrevista(new Date().toISOString().split("T")[0]);
 
-      if (onTaskCreated) onTaskCreated(); // Chama o callback
-
+      if (onTaskCreated) onTaskCreated();
     } catch (error) {
       console.error("Erro:", error);
     }
@@ -78,7 +87,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [title, description, starOn, starTouched]);
+  }, [title, description, starOn, starTouched, prioridade, dataPrevista]);
 
   return (
     <div
@@ -86,7 +95,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       className="bg-white shadow-md rounded w-[90%] sm:w-1/2 mx-auto p-4"
     >
       <form onKeyDown={handleKeyDown}>
-        <header className="mb-4 flex items-center">
+        <header className="mb-4 flex items-center gap-3">
           <input
             type="text"
             placeholder="Título"
@@ -100,7 +109,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
               setStarTouched(true);
               setStarOn(!starOn);
             }}
-            className="ml-3 text-yellow-500 focus:outline-none"
+            className="text-yellow-500 focus:outline-none"
             aria-label={starOn ? "Desfavoritar" : "Favoritar"}
           >
             {starOn ? (
@@ -118,25 +127,42 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
           onChange={(e) => setDescription(e.target.value)}
           className="w-full pb-5 pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
         />
-      </form>
 
-      <footer className="flex justify-center items-center mt-6 text-xs text-gray-600">
-        <div className="flex gap-3 items-center">
+        <div className="flex justify-center items-center gap-4 mt-4 text-sm text-gray-600">
+          <div className="flex items-center gap-1">
+            <Flag
+              className="w-5 h-5"
+              color={
+                prioridade === "ALTA"
+                  ? "red"
+                  : prioridade === "MEDIA"
+                  ? "orange"
+                  : "green"
+              }
+            />
+            <select
+              value={prioridade}
+              onChange={(e) => setPrioridade(e.target.value as Prioridade)}
+              className="border border-gray-300 rounded px-2 py-1"
+            >
+              <option value="ALTA">Alta</option>
+              <option value="MEDIA">Média</option>
+              <option value="BAIXA">Baixa</option>
+            </select>
+          </div>
 
-          <Flag className="w-4 h-4" />
-          <span className="text-[10px] font-semibold">
-            {"MÉDIA"}
-          </span>
-          
-          <Calendar className="w-4 h-4" />
-          <span className="text-[10px]">
-            {"Sem data"}
-          </span>
+          <div className="flex items-center gap-1">
+            <Calendar className="w-5 h-5" />
+            <input
+              type="date"
+              value={dataPrevista}
+              onChange={(e) => setDataPrevista(e.target.value)}
+              className="border border-gray-300 rounded px-2 py-1"
+              min={new Date().toISOString().split("T")[0]}
+            />
+          </div>
         </div>
-      </footer>
-
+      </form>
     </div>
-
-    
   );
 }
