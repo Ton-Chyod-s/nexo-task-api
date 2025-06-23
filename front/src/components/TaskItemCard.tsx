@@ -11,6 +11,8 @@ type TaskItemCardProps = {
   body?: string;
   onDelete?: () => void;
   onStatusChange?: (newStatus: boolean) => void;
+  priority?: "Alta" | "Média" | "Baixa";
+  date?: string; // Ex: '2025-06-24 07:00'
 };
 
 const fetchDeleteTask = async (id: string, token: string) => {
@@ -40,6 +42,8 @@ export default function TaskItemCard({
   body,
   onDelete,
   onStatusChange,
+  priority,
+  date
 }: TaskItemCardProps) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -96,23 +100,36 @@ export default function TaskItemCard({
           </button>
         </header>
 
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 mb-4 pb-44">
           {body || "Nenhuma descrição fornecida."}
         </p>
 
-        <footer className="flex justify-between items-center mt-6 text-lg">
-          <div className="flex gap-3">
-            <button title="Editar">
-              <Pencil className="w-5 h-5 text-gray-600" />
-            </button>
-            <button title="Cor" onClick={() => setIsModalOpen(true)}>
-              <Droplet className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
-          <button title="Excluir" onClick={handleDelete}>
-            <X className="w-5 h-5 text-gray-600" />
+        <footer className="flex justify-between items-center mt-6 text-sm">
+        <div className="flex gap-3 items-center">
+          <button title="Editar">
+            <Pencil className="w-5 h-5 text-gray-600" />
           </button>
-        </footer>
+          <button title="Cor" onClick={() => setIsModalOpen(true)}>
+            <Droplet className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+
+        <div className="flex flex-col items-end text-[11px] text-gray-500">
+          <div className="flex gap-3">
+            <span className="flex items-center gap-1">
+              ⏱️ <span className="font-medium">{priority}</span>
+            </span>
+            <span className="flex items-center gap-1">
+              📅 <span>{date}</span>
+            </span>
+          </div>
+        </div>
+
+        <button title="Excluir" onClick={handleDelete}>
+          <X className="w-5 h-5 text-gray-600" />
+        </button>
+      </footer>
+
       </div>
 
       {isModalOpen && (

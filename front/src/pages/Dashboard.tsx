@@ -7,12 +7,27 @@ import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const navigate = useNavigate();
 
+  function formatarDataBr(dataIso?: string): string {
+    if (!dataIso) return "Sem data";
+    const data = new Date(dataIso);
+    return data.toLocaleString("pt-BR", {
+      timeZone: "America/Sao_Paulo",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }
+
   interface Task {
     id: number;
     titulo: string;
     descricao?: string;
     status: boolean;
     color?: string;
+    prioridade?: "Alta" | "Média" | "Baixa";
+    dataPrevista?: string; // Ex: '2025-06-24 07:00'
   }
 
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -110,6 +125,8 @@ export default function Dashboard() {
                   body={task.descricao}
                   onDelete={fetchTasks}
                   onStatusChange={(newStatus) => fetchPutTaskStatus(task.id, newStatus)}
+                  priority={task.prioridade} // fallback padrão
+                  date={formatarDataBr(task.dataPrevista) || "Sem data"} // fallback padrão
                 />
               ))
           )}
