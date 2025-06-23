@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Pencil, Droplet, Star, StarOff } from "lucide-react";
+import { X, Pencil, Droplet, Star, StarOff, Flag, Calendar } from "lucide-react";
 import ColorPickerModal from "../components/ColorPickerModal";
 import { useNavigate } from "react-router-dom";
 
@@ -117,10 +117,12 @@ export default function TaskItemCard({
         <div className="flex flex-col items-end text-[11px] text-gray-500">
           <div className="flex gap-3">
             <span className="flex items-center gap-1">
-              ⏱️ <span className="font-medium">{priority}</span>
+              <Flag className="w-4 h-4" />
+              <span className="font-medium">{priority}</span>
             </span>
             <span className="flex items-center gap-1">
-              📅 <span>{date}</span>
+              <Calendar className="w-4 h-4" />
+              <span>{date}</span>
             </span>
           </div>
         </div>

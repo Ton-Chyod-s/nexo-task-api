@@ -1,4 +1,4 @@
-import { Star, StarOff } from "lucide-react";
+import { Star, StarOff, Flag, Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -119,6 +119,24 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
           className="w-full pb-5 pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
         />
       </form>
+
+      <footer className="flex justify-center items-center mt-6 text-xs text-gray-600">
+        <div className="flex gap-3 items-center">
+
+          <Flag className="w-4 h-4" />
+          <span className="text-[10px] font-semibold">
+            {"MÉDIA"}
+          </span>
+          
+          <Calendar className="w-4 h-4" />
+          <span className="text-[10px]">
+            {"Sem data"}
+          </span>
+        </div>
+      </footer>
+
     </div>
+
+    
   );
 }
