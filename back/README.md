@@ -2,7 +2,7 @@
 
 Este projeto é uma API responsável pela gestão de tarefas, incluindo funcionalidades de CRUD e autenticação de usuários. Ele utiliza Node.js com TypeScript, Prisma para comunicação com o banco de dados, e JWT para autenticação.
 
-## Decisões técnicas e raciocínio - Klayton Dias (RGA 202532922092)
+## Decisões técnicas e raciocínio
 
 Separei bem as responsabilidades do projeto pra manter a organização e facilitar a manutenção. Usei Node.js com TypeScript pela robustez e tipagem estática. A estrutura segue os princípios da Clean Architecture, o que ajuda bastante na hora de testar ou expandir o sistema. Usei Prisma como ORM, JWT pra autenticação e SQLite no dev (com PostgreSQL pronto pra produção). Também deixei tudo configurado pra rodar com Docker, mas dá pra usar direto com Node se preferir.
 
