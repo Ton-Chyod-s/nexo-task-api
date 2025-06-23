@@ -4,45 +4,45 @@ import TaskItemCard from "../components/TaskItemCard";
 import { useEffect, useState  } from "react";
 import { useNavigate } from "react-router-dom";
 
-const tasksFromDb = [
-  { id: 1, title: "Título 1", isFavorite: true, color: "bg-white", body: "Descrição da tarefa 1" },
-  { id: 2, title: "Título 2", isFavorite: true, color: "bg-blue-200", body: "Descrição da tarefa 2"},
-  { id: 3, title: "Título 3", isFavorite: false, color: "bg-white", body: "Descrição da tarefa 3" },
-];
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
+  interface Task {
+    id: number;
+    titulo: string;
+    descricao?: string;
+    status: boolean; 
+    color?: string;
+  }
+
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  async function fetchTasks() {
     const token = sessionStorage.getItem("token");
-
     if (!token) {
       navigate("/login");
       return;
     }
+    try {
+      const response = await fetch("http://localhost:3002/tasks", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    async function fetchTasks() {
-      try {
-        const response = await fetch("http://localhost:3002/tasks", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      if (!response.ok) throw new Error("Erro ao buscar tarefas");
 
-        if (!response.ok) {
-          throw new Error("Erro ao buscar tarefas");
-        }
-
-        const data = await response.json();
-        setTasks(data); 
-      } catch (error) {
-        console.error("Erro ao buscar tarefas:", error);
-      }
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
     }
+  }
 
+  useEffect(() => {
     fetchTasks();
   }, [navigate]);
 
@@ -54,19 +54,26 @@ export default function Dashboard() {
       <main className="w-full flex flex-col items-center mx-auto">
 
         <div className="p-4 flex items-center justify-between w-full ">
-          <TaskCard />
+          <TaskCard onTaskCreated={fetchTasks}  />
         </div>
 
         <div className="flex flex-wrap justify-center gap-4 w-full p-4">
-        {tasksFromDb.map((task) => (
-          <TaskItemCard
-            key={task.id}
-            title={task.title}
-            isFavorite={task.isFavorite}
-            color={task.color}
-            body={task.body}
-          />
-        ))}
+        {tasks.length === 0 ? (
+          <p className="text-gray-500">Nenhuma tarefa cadastrada</p>
+        ) : (
+          tasks
+            .slice() 
+            .sort((a, b) => (b.status === true ? 1 : 0) - (a.status === true ? 1 : 0))
+            .map((task) => (
+              <TaskItemCard
+                key={task.id}
+                title={task.titulo}
+                isFavorite={task.status}
+                color={task.color || "bg-white"}
+                body={task.descricao}
+              />
+            ))
+        )}
       </div>
 
         <h1 className="text-2xl font-bold"></h1>

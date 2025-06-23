@@ -2,7 +2,11 @@ import { Star, StarOff } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function TaskCard() {
+type TaskCardProps = {
+  onTaskCreated?: () => void;
+};
+
+export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,17 +24,13 @@ export default function TaskCard() {
 
     if (!title.trim() || !description.trim()) return;
 
-    const taskPayload: any = {
+    const taskPayload = {
       titulo: title,
       descricao: description,
       dataPrevista: new Date().toISOString(),
       prioridade: "MEDIA",
-      status: false,
+      status: starTouched ? starOn : false,
     };
-
-    if (starTouched) {
-      taskPayload.status = starOn;
-    } 
 
     try {
       const response = await fetch("http://localhost:3002/tasks", {
@@ -43,11 +43,13 @@ export default function TaskCard() {
       });
 
       if (!response.ok) throw new Error("Erro ao criar tarefa");
-   
+
       setTitle("");
       setDescription("");
       setStarOn(false);
       setStarTouched(false);
+
+      if (onTaskCreated) onTaskCreated(); // Chama o callback
 
     } catch (error) {
       console.error("Erro:", error);
@@ -68,8 +70,8 @@ export default function TaskCard() {
         !cardRef.current.contains(event.target as Node) &&
         (title.trim() || description.trim())
       ) {
-          handleCreateTask();
-        }
+        handleCreateTask();
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
