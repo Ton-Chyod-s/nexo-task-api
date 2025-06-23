@@ -8,7 +8,7 @@ export function sqliteToDate(dateString: string): Date {
 }
 
 export function postGresToDate(data: string): string {
-  const [dia, mes, ano] = data.split("/").map(Number);
+  const [ano, mes, dia] = data.split("-").map(Number);
 
   const agora = new Date();
   const hora = agora.getHours();
@@ -21,5 +21,6 @@ export function postGresToDate(data: string): string {
     throw new Error(`Data inválida recebida em postGresToDate: "${data}"`);
   }
 
-  return date.toISOString();
+  return date.toISOString(); 
 }
+
