@@ -1,4 +1,4 @@
-import { X, Search } from "lucide-react";
+import { X, Search, LucideNotebook } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type SearchHeaderProps = {
@@ -31,6 +31,7 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
   return (
     <header className="bg-white shadow flex items-center justify-between px-2 py-4">
       <div className="flex items-center gap-2 ml-5 text-gray-700">
+        <LucideNotebook  size={24} className="text-blue-500" />
         <span className="font-semibold">CoreNotes</span>
       </div>
 
