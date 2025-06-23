@@ -19,6 +19,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   const [dataPrevista, setDataPrevista] = useState(() =>
     new Date().toISOString().split("T")[0]
   ); 
+  const [cor, setCor] = useState("#ffffff");
 
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       dataPrevista,
       prioridade,
       status: starTouched ? starOn : false,
+      cor,
     };
 
     try {
