@@ -30,7 +30,7 @@ export class UpdateTaskController {
     }
 
     private static extractTaskData(body: any): Partial<UpdateTaskDTO> {
-        const { titulo, descricao, dataPrevista, prioridade, status } = body;
+        const { titulo, descricao, dataPrevista, prioridade, status, cor } = body;
         const taskData: Partial<UpdateTaskDTO> = {};
 
         if (titulo !== undefined) taskData.titulo = titulo;
@@ -38,6 +38,7 @@ export class UpdateTaskController {
         if (dataPrevista !== undefined) taskData.dataPrevista = dataPrevista;
         if (prioridade !== undefined) taskData.prioridade = prioridade;
         if (status !== undefined) taskData.status = status;
+        if (cor !== undefined) taskData.cor = cor;
 
         return taskData;
     }
