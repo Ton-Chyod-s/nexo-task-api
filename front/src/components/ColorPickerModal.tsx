@@ -8,9 +8,18 @@ type Props = {
 };
 
 const colors = [
-  "bg-red-500", "bg-green-400", "bg-blue-300", "bg-yellow-400",
-  "bg-pink-500", "bg-purple-400", "bg-indigo-500", "bg-teal-400",
-  "bg-orange-400", "bg-gray-300", "bg-gray-500", "bg-gray-700"
+  "bg-red-200",    // vermelho pastel
+  "bg-green-200",  // verde pastel
+  "bg-blue-200",   // azul pastel
+  "bg-yellow-200", // amarelo pastel
+  "bg-pink-200",   // rosa pastel
+  "bg-purple-200", // roxo pastel
+  "bg-indigo-200", // índigo pastel
+  "bg-teal-200",   // teal pastel
+  "bg-orange-200", // laranja pastel
+  "bg-gray-200",   // cinza clarinho pastel
+  "bg-gray-300",   // cinza um pouco mais escuro, mas ainda pastel
+  "bg-gray-400"    // cinza médio pastel
 ];
 
 export default function ColorPickerModal({ onClose, onSelect, id }: Props) {
