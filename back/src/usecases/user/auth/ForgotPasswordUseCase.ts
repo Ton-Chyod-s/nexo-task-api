@@ -3,7 +3,7 @@ import { IMailerService } from "@domain/services/mailer-service";
 import crypto from "crypto";
 require('dotenv').config({ path: '.env' });
 
-const PORT = process.env.PORT || 3002;
+const PORT_FRONT = process.env.PORT_FRONT || 3001;
 
 export class ForgotPasswordUseCase {
   constructor(
@@ -22,7 +22,7 @@ export class ForgotPasswordUseCase {
     user.tokenExpires = tokenExpires;
     await this.userRepo.save(user);
     
-    const resetLink = `http://localhost:${PORT}/reset-password?token=${token}`;
+    const resetLink = `http://localhost:${PORT_FRONT}/reset-password/${token}`;
     
     await this.mailer.sendMail({
       to: email,
