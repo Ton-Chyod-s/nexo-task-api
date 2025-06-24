@@ -151,7 +151,7 @@ export default function TaskItemCard({
             {starOn ? (
               <Star className="w-5 h-5 fill-yellow-500" />
             ) : (
-              <StarOff className="w-5 h-5" />
+              <StarOff className="w-5 h-5" /> 
             )}
           </button>
         </header>
@@ -163,7 +163,7 @@ export default function TaskItemCard({
             className="w-full text-sm text-gray-600 p-1 pl-5 rounded bg-white resize-none"
           />
         ) : (
-          <p className="ml-5 text-sm text-gray-600 mb-4 pb-44">
+          <p className="ml-5 text-sm text-gray-600 mb-4 pb-44 whitespace-pre-wrap break-words">
             {editBody || "Nenhuma descrição fornecida."}
           </p>
         )}
