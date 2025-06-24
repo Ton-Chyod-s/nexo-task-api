@@ -1,10 +1,10 @@
-# Projeto NexoTask API
+# NexoTask Backend
 
 Este projeto é uma API responsável pela gestão de tarefas, incluindo funcionalidades de CRUD e autenticação de usuários. Ele utiliza Node.js com TypeScript, Prisma para comunicação com o banco de dados, e JWT para autenticação.
 
 ## Decisões técnicas e raciocínio
 
-Separei bem as responsabilidades do projeto pra manter a organização e facilitar a manutenção. Usei Node.js com TypeScript pela robustez e tipagem estática. A estrutura segue os princípios da Clean Architecture, o que ajuda bastante na hora de testar ou expandir o sistema. Usei Prisma como ORM, JWT pra autenticação e SQLite no dev (com PostgreSQL pronto pra produção). Também deixei tudo configurado pra rodar com Docker, mas dá pra usar direto com Node se preferir.
+Separei bem as responsabilidades do projeto pra manter a organização e facilitar a manutenção. Usei Node.js com TypeScript pela robustez e tipagem estática. A estrutura segue os princípios da Clean Architecture, o que ajuda bastante na hora de testar ou expandir o sistema. Usei Prisma como ORM, JWT pra autenticação e PostgreSQL. Também deixei tudo configurado pra rodar com Docker, mas dá pra usar direto com Node se preferir.
 
 Utilizei:
 
@@ -16,25 +16,23 @@ Utilizei:
 
 - Vitest nos testes por ser leve, rápido e ter boa integração com TypeScript.
 
-- SQLite no ambiente de desenvolvimento e PostgreSQL pra produção, pensando em leveza e robustez.
+- PostgreSQL como banco de dados pensando em leveza e robustez.
 
-- Docker e docker-compose pra facilitar a configuração do ambiente e evitar problemas de dependência.
+- Docker pra facilitar a configuração do ambiente e evitar problemas de dependência.
 
 - Estrutura limpa separando interfaces, usecases, domain e infrastructure, pra deixar cada parte com sua função bem definida.
 
 - Organização dos testes por contexto com mocks e cobertura de código.
 
-- CI com GitHub Actions pra rodar testes automaticamente.
-
 - Documentação mantida em Markdown dentro da pasta docs/, incluindo um guia rápido de como subir o projeto.
 
-Também implementei envio de e-mail com Nodemailer e simulei integrações externas com rotas mockadas. A ideia é deixar o projeto pronto pra crescer sem virar bagunça.
+- Também implementei envio de e-mail com Nodemailer e simulei integrações externas com rotas mockadas. A ideia é deixar o projeto pronto pra crescer sem virar bagunça.
 
 ## Funcionalidades
 
 - Criação, leitura, atualização e exclusão de tarefas (CRUD).
 - Registro e login de usuários com autenticação via JWT.
-- Persistência de dados utilizando banco de dados SQLite para teste e PostgreSQL para produção.
+- Persistência de dados utilizando banco de dados PostgreSQL.
 - API RESTful com endpoints para manipulação de tarefas e usuários.
 
 ## Tecnologias
@@ -42,7 +40,7 @@ Também implementei envio de e-mail com Nodemailer e simulei integrações exter
 - Node.js
 - TypeScript
 - Prisma ORM (para interação com o banco de dados)
-- SQLite e PostgreSQL (banco de dados)
+- PostgreSQL (banco de dados)
 - JWT (para autenticação de usuários)
 - Nodemon (para recarga automática durante o desenvolvimento)
 
@@ -61,8 +59,8 @@ Para configurar o projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório
    ```bash
-   git clone https://github.com/Mega-Grupo-11/JubileuTaskListAPI.git
-   cd JubileuTaskListAPI
+   git clone https://github.com/Ton-Chyod-s/nexo-task-api.git
+   cd nexo-task-api
 
 2. Instale as dependências
     ```bash
@@ -70,11 +68,11 @@ Para configurar o projeto localmente, siga os passos abaixo:
     ```
 
 3. Configure o banco de dados
-O projeto utiliza SQLite para persistência de dados. Não é necessário configurar um servidor externo. Porém, é necessário garantir que o arquivo de banco de dados seja gerado corretamente.
+O projeto utiliza PostgreSQL para persistência de dados. Não é necessário configurar um servidor externo. Porém, é necessário garantir que o banco de dados seja gerado corretamente.
 
 4. Execute as migrations do Prisma
     ```bash
-    npx prisma migrate dev --schema=./prisma/schema.dev.prisma
+    npx prisma migrate dev --schema=./prisma/schema.prisma
     ```
 
 5. Execute o servidor
@@ -82,28 +80,45 @@ Inicie o servidor em modo de desenvolvimento:
     ```bash
     npm run dev
     ```
-    O servidor estará disponível em http://localhost:5050.
-
-## Instalação com Docker
-
-Se você preferir rodar o projeto usando Docker, siga as instruções detalhadas no documento de configuração do Docker [aqui](./docs/docker-setup.md).
+    O servidor estará disponível em http://localhost:3002.
 
 ## Variáveis de Ambiente
 
 O projeto depende das seguintes variáveis de ambiente:
 
-- **DATABASE_URL_DEV:** URL de conexão com o banco de dados SQLite.
+- **DATABASE_URL:** URL de conexão com o banco de dados PostgreSQL local.
   
 - **DATABASE_URL_PROD:** URL de conexão com o banco de dados PostgreSQL.
 
 - **JWT_SECRET:** Chave secreta para assinatura de tokens JWT.
 
+- **PORT:** Porta da api do back
+
+- **PORT_FRONT:** Porta da GUI do front
+
+- **SMTP_HOST:** smtp.gmail.com Host do email
+- **SMTP_PORT:** 465 Porta do email
+- **PORT_SERVER:** 1000 Server do email
+- **SMTP_USER:** exemplo@gmail.com Email que vai mandar a solicitação de reset de senha
+- **SMTP_PASSWORD:** Senha de aplicativo do email
+
+
 Exemplo de arquivo `.env`:
 
 ```bash
-DATABASE_URL_DEV="file:./data/mega-grupo-3.db"
-DATABASE_URL_PROD="postgresql://user:password@localhost:5432/mydb"
-JWT_SECRET="supersecretkey"
+JWT_SECRET_KEY= ***
+
+DATABASE_URL=postgresql://postgres:123@localhost:5433/nexoTaskApi
+DATABASE_URL_PROD=postgresql://postgres:123@localhost:5433/nexoTaskApi
+
+PORT=3002
+PORT_FRONT=3001
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+PORT_SERVER=1000
+SMTP_USER=exemplo@gmail.com
+SMTP_PASSWORD=lolololol
 ```
 
 ## Licença

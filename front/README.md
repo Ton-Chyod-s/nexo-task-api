@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
+# NexoTask Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web para o sistema de gerenciamento de tarefas NexoTask. Este projeto consome a [API NexoTask](https://github.com/Ton-Chyod-s/nexo-task-api/tree/main/back) e foi desenvolvido com **React + TypeScript**, utilizando **Vite** e **Tailwind CSS** para uma UI leve, responsiva e moderna.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- **React + TypeScript** – para uma interface robusta e tipada.
+- **Vite** – empacotador moderno com build rápido e ambiente de desenvolvimento otimizado.
+- **Tailwind CSS** – estilização utilitária para uma UI limpa e responsiva.
+- **React Router** – gerenciamento de rotas de forma simples e declarativa.
+- **Lucide React** – ícones modernos e leves.
+- **fetch** – para consumo da API backend.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Funcionalidades
+
+- Cadastro e login de usuários com integração à API.
+- Recuperação e redefinição de senha via e-mail.
+- Criação, edição, exclusão e visualização de tarefas.
+- Marcação de tarefas favoritas.
+- Interface responsiva com tema limpo e intuitivo.
+- Integração com backend via requisições REST.
+
+---
+
+## Como rodar localmente
+
+1. **Clone o projeto**
+
+```bash
+git clone https://github.com/Ton-Chyod-s/nexo-task-api/tree/dev/front.git
+cd nexo-task-api
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. **Instale as dependência**
+   
+```bash
+npm install
 ```
+
+3. Configure as variáveis de ambiente
+   
+```bash
+VITE_PORT=3001
+```
+
+4. Rode o projeto
+
+```bash
+npm run dev
+```
+
+5. Rode o tailwind para desenvolvimento
+
+```bash
+npm run dev:css
+```
+
+A aplicação estará disponível em http://localhost:3001
+
+## Estrutura do Projeto
+
+```text
+front/
+├── public/              # Arquivos estáticos
+├── src/
+│   ├── assets/          # Imagens e estilos
+│   ├── components/      # Componentes reutilizáveis
+│   ├── pages/           # Páginas da aplicação
+│   ├── routes/          # Gerenciamento de rotas
+│   └── main.tsx         # Ponto de entrada do app
+├── index.html
+├── vite.config.ts
+└── tailwind.config.js
+```
+
+## Licença
+
+Este projeto está licenciado sob a MIT license.
