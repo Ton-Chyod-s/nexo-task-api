@@ -109,7 +109,7 @@ npm run dev
 
 Acesse o sistema em http://localhost:3001
 
-## 🐞 Modo Debug com VS Code
+## Modo Debug com VS Code
 
 Para executar o projeto em modo debug:
 
