@@ -33,55 +33,46 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
       - name: Install backend dependencies
         run: npm install
         working-directory: ./back
-
       - name: Generate Prisma client
         run: npx prisma generate
         working-directory: ./back
-
       - name: Run migrations
         run: npx prisma migrate deploy
         working-directory: ./back
-
       - name: Run backend tests
         run: npm test
         working-directory: ./back
 
   frontend:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
       - name: Install frontend dependencies
         run: npm install
         working-directory: ./front
-
       - name: Build frontend
         run: npm run build
         working-directory: ./front
 
   enable-automerge:
-      needs: [backend, frontend]    
-      runs-on: ubuntu-latest
-      if: ${{ success() }}
-      steps:
-        - name: Enable auto-merge
-          uses: peter-evans/enable-pull-request-automerge@v3
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ github.event.pull_request.number }}
-            merge-method: squash
+    needs: [backend, frontend]     
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    steps:
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
