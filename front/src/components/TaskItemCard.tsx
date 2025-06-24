@@ -108,13 +108,6 @@ export default function TaskItemCard({
     onStatusChange?.(newStatus);
   };
 
-  const priorityColorClass =
-    editPriority === "ALTA"
-      ? "text-red-500"
-      : editPriority === "MEDIA"
-      ? "text-orange-400"
-      : "text-green-600";
-
   return (
     <>
       <div
