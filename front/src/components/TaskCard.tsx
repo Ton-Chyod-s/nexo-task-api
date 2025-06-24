@@ -68,10 +68,26 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       handleCreateTask();
     }
+  }
+
+  function handleDescriptionChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const maxCharsPerLine = 46;
+    const value = e.target.value;
+
+    const lines = value.split("\n");
+    const newLines = lines.flatMap(line => {
+      if (line.length <= maxCharsPerLine) {
+        return [line];
+      }
+      const regex = new RegExp(`.{1,${maxCharsPerLine}}`, "g");
+      return line.match(regex) || [];
+    });
+
+    setDescription(newLines.join("\n"));
   }
 
   useEffect(() => {
@@ -97,13 +113,13 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       className="bg-white shadow-md rounded w-[90%] sm:w-2/5 mx-auto p-4"
     >
       <form onKeyDown={handleKeyDown}>
-        <header className="mb-4 flex items-center gap-3">
+        <header className="mb-4 pb-2 flex items-center gap-3 border-b border-gray-300">
           <input
             type="text"
             placeholder="Título"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="flex-grow pb-2 pl-5 mt-1 border-b border-gray-300 text-xl font-semibold focus:border-blue-600 outline-none"
+            className="flex-grow pl-5 mt-1 text-xl font-semibold focus:border-blue-600 outline-none"
           />
           <button
             type="button"
@@ -111,7 +127,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
               setStarTouched(true);
               setStarOn(!starOn);
             }}
-            className="text-yellow-500 focus:outline-none"
+            className="text-yellow-500 focus:outline-none mt-1"
             aria-label={starOn ? "Desfavoritar" : "Favoritar"}
           >
             {starOn ? (
@@ -122,12 +138,12 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
           </button>
         </header>
 
-        <input
-          type="text"
+        <textarea
           placeholder="Descrição"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
+          onChange={handleDescriptionChange}
+          className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none resize-none whitespace-pre-wrap break-words"
+          rows={1}
         />
 
         <div className="flex justify-center items-center gap-4 mt-4 text-sm text-gray-600">

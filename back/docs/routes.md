@@ -81,7 +81,7 @@ Status: 200 OK Size: 238 Bytes Time: 69 ms
 }
 ```
 
-### POST `/task`
+### POST `/tasks`
 **Descrição:**
 Cria uma nova tarefa. Requer autenticação JWT.
 
@@ -94,9 +94,10 @@ Authorization: Bearer JWT_TOKEN
 {
   "titulo": "subir commit para garantir",
   "descricao": "consegui terminar a dockerização da api",
-  "dataPrevista": "2025-05-12T14:00:00.000Z",
+  "dataPrevista": "2025-05-12",
   "prioridade": "MEDIA",
-  "status": true
+  "status": true,
+  "cor": "bg-back"
 }
 ```
 ```json
@@ -118,6 +119,7 @@ Status: 201 Created Size: 280 Bytes Time: 17 ms
     "dataPrevista": "2025-05-12T14:00:00.000Z",
     "prioridade": "MEDIA",
     "status": true,
+    "cor": "bg-back",
     "createdAt": "2025-05-12T11:18:11.906Z",
     "usuarioId": 1
   }
@@ -150,6 +152,7 @@ Status: 200 OK Size: 459 Bytes Time: 9 ms
     "dataPrevista": "2025-05-12T14:00:00.000Z",
     "prioridade": "MEDIA",
     "status": true,
+    "cor": "bg-back",
     "createdAt": "2025-05-12T11:18:11.906Z",
     "usuarioId": 1
   },
@@ -160,13 +163,14 @@ Status: 200 OK Size: 459 Bytes Time: 9 ms
     "dataPrevista": "2025-05-06T14:00:00.000Z",
     "prioridade": "MEDIA",
     "status": true,
+    "cor": "bg-back",
     "createdAt": "2025-05-12T11:17:35.829Z",
     "usuarioId": 1
   }
 ]
 ```
 
-### PUT `/tasks/:id`
+### PUT `/task/:id`
 **Descrição:**
 Atualiza a tarefa que foi passada por id. Requer autenticação JWT.
 **Headers:**
@@ -197,10 +201,32 @@ Status: 200 OK Size: 225 Bytes Time: 10 ms
   "dataPrevista": "2025-05-06T14:00:00.000Z",
   "prioridade": "MEDIA",
   "status": false,
+  "cor": "bg-back",
   "createdAt": "2025-05-12T11:17:35.829Z",
   "usuarioId": 1
 }
 ```
+
+### DELETE `/task/:id`
+**Descrição:**
+Deleta a tarefa que foi passada por id. Requer autenticação JWT.
+**Headers:**
+
+```makefile
+Authorization: Bearer JWT_TOKEN
+```
+
+```json
+Status: 200 OK Size: 225 Bytes Time: 10 ms
+```
+- **Corpo:**
+```json
+{
+  "success": "Task deleted"
+}
+```
+
+
 ### POST `/forgot-password`
 **Descrição:**
 Recuperação de senha

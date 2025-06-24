@@ -12,13 +12,8 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Cadastro com:", form);
-    if (
-      !form.name ||
-      !form.email ||
-      !form.password ||
-      !form.confirmPassword
-    ) {
+
+    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
       alert("Preencha todos os campos.");
       return;
     }
@@ -29,7 +24,6 @@ export default function Register() {
     }
 
     fetchRegister();
-    
   };
 
   async function fetchRegister() {
@@ -52,18 +46,12 @@ export default function Register() {
         throw new Error(error.message || "Erro no cadastro");
       }
 
-      if (response.ok) {
-        const data = await response.json();
-        
-        sessionStorage.setItem("token", data.token);
+      const data = await response.json();
+      sessionStorage.setItem("token", data.token);
 
-        setTimeout(() => {
-            navigate("/dashboard", { replace: true });
-          }, 1000);
-        
-      } else {
-        window.alert("Falha no cadastro. Verifique seus dados.");
-      } 
+      setTimeout(() => {
+        navigate("/dashboard", { replace: true });
+      }, 1000);
     } catch (error) {
       console.error("Erro ao fazer cadastro:", error);
       window.alert("Ocorreu um erro ao tentar fazer cadastro. Tente novamente mais tarde.");
@@ -72,21 +60,32 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-xl font-semibold text-gray-800 mb-1 text-center">Cadastro</h2>
+          <p className="text-sm text-gray-500 mb-6 text-center">Crie sua conta para começar a usar</p>
 
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Cadastro</h2>
-        <InputField label="Nome" name="name" value={form.name} onChange={handleChange} />
-        <InputField label="Email" name="email" value={form.email} onChange={handleChange} />
-        <InputField label="Senha" name="password" type="password" value={form.password} onChange={handleChange} />
-        <InputField label="Confirmar Senha" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} />
-        <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-700">
-          Criar conta
-        </button>
-        <p className="text-sm text-center mt-4">
-          Já tem conta? <Link to="/login" className="text-green-600 hover:underline">Entrar</Link>
-        </p>
-      </form>
+          <div className="space-y-4">
+            <InputField label="Nome" name="name" value={form.name} onChange={handleChange} />
+            <InputField label="Email" name="email" value={form.email} onChange={handleChange} />
+            <InputField label="Senha" name="password" type="password" value={form.password} onChange={handleChange} />
+            <InputField label="Confirmar Senha" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} />
+            <button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+            >
+              Criar conta
+            </button>
+          </div>
 
+          <p className="text-sm text-center mt-4 text-gray-600">
+            Já tem conta?{" "}
+            <Link to="/login" className="text-green-600 hover:underline">
+              Entrar
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

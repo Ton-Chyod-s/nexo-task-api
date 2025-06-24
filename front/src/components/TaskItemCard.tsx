@@ -16,6 +16,23 @@ type TaskItemCardProps = {
   onColorChange?: (color: string) => void;
 };
 
+function formatDateToBR(dateStr: string): string {
+  if (!dateStr) return "";
+
+  if (dateStr.includes("/") && dateStr.includes(",")) {
+    return dateStr.split(",")[0]; 
+  }
+
+  if (dateStr.includes("/")) {
+    return dateStr;
+  }
+
+  const [year, month, day] = dateStr.split("-");
+  if (!year || !month || !day) return "";
+
+  return `${day}/${month}/${year}`;
+}
+
 const fetchDeleteTask = async (id: string, token: string) => {
   const numericId = Number(id);
   if (isNaN(numericId)) throw new Error("ID inválido");
@@ -112,46 +129,50 @@ export default function TaskItemCard({
     <>
       <div
         id={`task-${id}`}
-        className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor}`}
+        className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor} flex flex-col min-h-[300px]`}
       >
-        <header className="flex justify-between items-center mb-3">
+        <div className="flex-grow">
+          <header className="flex justify-between items-center mb-3 border-b border-gray-300 pb-1">
+            {isEditing ? (
+              <input
+                value={editTitle}
+                onChange={(e) => setEditTitle(e.target.value)}
+                className="pl-5 flex-grow text-lg font-bold bg-white rounded px-2"
+              />
+            ) : (
+              <p className="pl-5 flex-grow bg-transparent text-lg font-bold">
+                {editTitle}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={handleToggleStar}
+              className="ml-2 text-yellow-500"
+            >
+              {starOn ? (
+                <Star className="w-5 h-5 fill-yellow-500" />
+              ) : (
+                <StarOff className="w-5 h-5" />
+              )}
+            </button>
+          </header>
+
           {isEditing ? (
-            <input
-              value={editTitle}
-              onChange={(e) => setEditTitle(e.target.value)}
-              className="flex-grow text-lg font-bold border-b border-gray-300 pb-1 bg-white rounded px-2"
+            <textarea
+              value={editBody}
+              onChange={(e) => setEditBody(e.target.value)}
+              className="w-full text-sm text-gray-600 p-1 pl-5 rounded bg-white resize-none"
+              rows={5}
             />
           ) : (
-            <p className="flex-grow bg-transparent text-lg font-bold border-b border-gray-300 pb-1">
-              {editTitle}
+            <p className="ml-5 text-sm text-gray-600 mb-4 whitespace-pre-wrap break-words">
+              {editBody || "Nenhuma descrição fornecida."}
             </p>
           )}
-          <button
-            type="button"
-            onClick={handleToggleStar}
-            className="ml-2 text-yellow-500"
-          >
-            {starOn ? (
-              <Star className="w-5 h-5 fill-yellow-500" />
-            ) : (
-              <StarOff className="w-5 h-5" />
-            )}
-          </button>
-        </header>
+        </div>
 
-        {isEditing ? (
-          <textarea
-            value={editBody}
-            onChange={(e) => setEditBody(e.target.value)}
-            className="w-full text-sm text-gray-600 mb-4 p-2 border rounded bg-white"
-          />
-        ) : (
-          <p className="text-sm text-gray-600 mb-4 pb-44">
-            {editBody || "Nenhuma descrição fornecida."}
-          </p>
-        )}
-
-        <footer className="flex justify-between items-center mt-6 text-sm">
+        {/* Footer fica sempre no fim por causa do mt-auto */}
+        <footer className="flex justify-between items-center mt-auto text-sm">
           <div className="flex gap-3 items-center">
             <button title="Editar" onClick={() => setIsEditing(true)}>
               <Pencil className="w-5 h-5 text-gray-600" />
@@ -179,7 +200,11 @@ export default function TaskItemCard({
                     value={editPriority}
                     onChange={(e) => {
                       const value = e.target.value;
-                      if (value === "ALTA" || value === "MEDIA" || value === "BAIXA") {
+                      if (
+                        value === "ALTA" ||
+                        value === "MEDIA" ||
+                        value === "BAIXA"
+                      ) {
                         setEditPriority(value);
                       }
                     }}
@@ -204,7 +229,7 @@ export default function TaskItemCard({
                     className="border rounded px-1 py-[2px]"
                   />
                 ) : (
-                  <span>{editDate}</span>
+                  <span>{formatDateToBR(editDate)}</span>
                 )}
               </span>
             </div>
