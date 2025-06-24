@@ -1,5 +1,15 @@
+# Ignorar node_modules dos dois lados
+**/node_modules
 
-src
-node_modules
-__test__
-docs
+# Ignorar testes
+**/__test__/
+
+# Ignorar arquivos e pastas desnecessários
+**/*.log
+**/docs
+.git
+.vscode
+.idea
+dist
+build
+coverage

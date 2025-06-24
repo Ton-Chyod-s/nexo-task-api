@@ -38,6 +38,42 @@ nexo-task-api/
 └── .vscode/              # Configurações de debug
 ```
 
+## Instalação Local (Docker)
+
+### Requisitos
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado na máquina
+- [Node.js](https://nodejs.org/) versão **22 ou superior**
+- Terminal Bash, PowerShell ou o terminal do VS Code
+
+---
+
+### 1. Subir os containers com build
+
+Execute o comando abaixo na raiz do projeto para construir as imagens e subir os containers:
+
+```bash
+docker-compose up -d --build
+```
+### 2. Verificar os containers e portas mapeadas
+Use o comando:
+```bash
+docker ps
+```
+
+Você verá uma saída parecida com esta:
+```bash
+CONTAINER ID   NAME                  PORTS
+abc123         nexo_back_container   0.0.0.0:3002->5050/tcp
+def456         nexo_front_container  0.0.0.0:3001->5055/tcp
+```
+### Endpoints locais
+
+- Front-end: http://localhost:3001
+
+- Back-end (API): http://localhost:3002
+
+
 ## Instalação Local (sem Docker)
 
 ### 1. Clonar o repositório
