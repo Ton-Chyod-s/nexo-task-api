@@ -16,6 +16,23 @@ type TaskItemCardProps = {
   onColorChange?: (color: string) => void;
 };
 
+function formatDateToBR(dateStr: string): string {
+  if (!dateStr) return "";
+
+  if (dateStr.includes("/") && dateStr.includes(",")) {
+    return dateStr.split(",")[0]; 
+  }
+
+  if (dateStr.includes("/")) {
+    return dateStr;
+  }
+
+  const [year, month, day] = dateStr.split("-");
+  if (!year || !month || !day) return "";
+
+  return `${day}/${month}/${year}`;
+}
+
 const fetchDeleteTask = async (id: string, token: string) => {
   const numericId = Number(id);
   if (isNaN(numericId)) throw new Error("ID inválido");
@@ -204,7 +221,7 @@ export default function TaskItemCard({
                     className="border rounded px-1 py-[2px]"
                   />
                 ) : (
-                  <span>{editDate}</span>
+                  <span>{formatDateToBR(editDate)}</span>
                 )}
               </span>
             </div>
