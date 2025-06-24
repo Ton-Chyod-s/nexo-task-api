@@ -26,8 +26,8 @@ export default function Dashboard() {
     descricao?: string;
     status: boolean;
     cor?: string;
-    prioridade?: "Alta" | "Média" | "Baixa";
-    dataPrevista?: string; 
+    prioridade?: "ALTA" | "MEDIA" | "BAIXA";
+    dataPrevista?: string;
   }
 
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -103,7 +103,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <SearchHeader search={search} setSearch={setSearch} />
 
-      <main className="w-full flex flex-col items-center mx-auto">
+      <main className="pt-15 w-full flex flex-col items-center mx-auto">
         <div className="p-4 flex items-center justify-between w-full">
           <TaskCard onTaskCreated={fetchTasks} />
         </div>

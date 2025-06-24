@@ -131,7 +131,6 @@ export default function TaskItemCard({
         id={`task-${id}`}
         className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor} flex flex-col min-h-[300px]`}
       >
-        {/* Conteúdo que cresce e empurra o footer */}
         <div className="flex-grow">
           <header className="flex justify-between items-center mb-3 border-b border-gray-300 pb-1">
             {isEditing ? (
@@ -163,6 +162,7 @@ export default function TaskItemCard({
               value={editBody}
               onChange={(e) => setEditBody(e.target.value)}
               className="w-full text-sm text-gray-600 p-1 pl-5 rounded bg-white resize-none"
+              rows={5}
             />
           ) : (
             <p className="ml-5 text-sm text-gray-600 mb-4 whitespace-pre-wrap break-words">

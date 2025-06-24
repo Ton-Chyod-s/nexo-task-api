@@ -29,7 +29,7 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
   const clearSearch = () => setSearch("");
 
   return (
-    <header className="bg-white shadow flex items-center justify-between px-2 py-4">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow flex items-center justify-between px-2 py-4">
       <div className="flex items-center gap-2 ml-5 text-gray-700">
         <LucideNotebook  size={24} className="text-blue-500" />
         <span className="font-semibold">CoreNotes</span>
