@@ -119,10 +119,10 @@ export default function TaskItemCard({
             <input
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
-              className="ml-5 flex-grow text-lg font-bold bg-white rounded px-2"
+              className="pl-5 flex-grow text-lg font-bold bg-white rounded px-2"
             />
           ) : (
-            <p className="ml-5 flex-grow bg-transparent text-lg font-bold">
+            <p className="pl-5 flex-grow bg-transparent text-lg font-bold">
               {editTitle}
             </p>
           )}
@@ -143,7 +143,7 @@ export default function TaskItemCard({
           <textarea
             value={editBody}
             onChange={(e) => setEditBody(e.target.value)}
-            className="ml-5 w-full text-sm text-gray-600 p-2 rounded bg-white resize-none"
+            className="w-full text-sm text-gray-600 p-1 pl-5 rounded bg-white resize-none"
           />
         ) : (
           <p className="ml-5 text-sm text-gray-600 mb-4 pb-44">

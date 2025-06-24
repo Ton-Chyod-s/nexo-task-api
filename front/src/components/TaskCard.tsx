@@ -97,13 +97,13 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       className="bg-white shadow-md rounded w-[90%] sm:w-2/5 mx-auto p-4"
     >
       <form onKeyDown={handleKeyDown}>
-        <header className="mb-4 flex items-center gap-3">
+        <header className="mb-4 pb-2 flex items-center gap-3 border-b border-gray-300">
           <input
             type="text"
             placeholder="Título"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="flex-grow pb-2 pl-5 mt-1 border-b border-gray-300 text-xl font-semibold focus:border-blue-600 outline-none"
+            className="flex-grow pl-5 mt-1 text-xl font-semibold focus:border-blue-600 outline-none"
           />
           <button
             type="button"
@@ -111,7 +111,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
               setStarTouched(true);
               setStarOn(!starOn);
             }}
-            className="text-yellow-500 focus:outline-none"
+            className="text-yellow-500 focus:outline-none mt-1"
             aria-label={starOn ? "Desfavoritar" : "Favoritar"}
           >
             {starOn ? (
