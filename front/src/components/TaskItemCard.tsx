@@ -114,15 +114,15 @@ export default function TaskItemCard({
         id={`task-${id}`}
         className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor}`}
       >
-        <header className="flex justify-between items-center mb-3">
+        <header className="flex justify-between items-center mb-3 border-b border-gray-300 pb-1">
           {isEditing ? (
             <input
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
-              className="flex-grow text-lg font-bold border-b border-gray-300 pb-1 bg-white rounded px-2"
+              className="ml-5 flex-grow text-lg font-bold bg-white rounded px-2"
             />
           ) : (
-            <p className="flex-grow bg-transparent text-lg font-bold border-b border-gray-300 pb-1">
+            <p className="ml-5 flex-grow bg-transparent text-lg font-bold">
               {editTitle}
             </p>
           )}
@@ -143,10 +143,10 @@ export default function TaskItemCard({
           <textarea
             value={editBody}
             onChange={(e) => setEditBody(e.target.value)}
-            className="w-full text-sm text-gray-600 mb-4 p-2 border rounded bg-white"
+            className="ml-5 w-full text-sm text-gray-600 p-2 rounded bg-white resize-none"
           />
         ) : (
-          <p className="text-sm text-gray-600 mb-4 pb-44">
+          <p className="ml-5 text-sm text-gray-600 mb-4 pb-44">
             {editBody || "Nenhuma descrição fornecida."}
           </p>
         )}
