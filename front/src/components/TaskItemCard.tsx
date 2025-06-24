@@ -171,7 +171,16 @@ export default function TaskItemCard({
           <div className="flex flex-col items-end text-[11px] text-gray-500">
             <div className="flex gap-3">
               <span className="flex items-center gap-1">
-                <Flag className={`w-5 h-5 ${priorityColorClass}`} />
+                <Flag
+                  className="w-5 h-5"
+                  color={
+                    priority === "ALTA"
+                      ? "red"
+                      : priority === "MEDIA"
+                      ? "orange"
+                      : "green"
+                  }
+                />
                 {isEditing ? (
                   <select
                     value={editPriority}
