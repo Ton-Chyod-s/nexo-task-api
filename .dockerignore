@@ -1,5 +1,10 @@
 
-src
-node_modules
-__test__
-docs
+back/src
+back/node_modules
+back/__test__
+back/docs
+back/dist
+
+front/src
+front/node_modules
+front/dist
