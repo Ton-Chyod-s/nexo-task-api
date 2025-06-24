@@ -1,6 +1,6 @@
-# Gerando a Imagem Docker para a Aplicação JubileuTaskListAPI
+# Gerando a Imagem Docker para a Aplicação NexoTaskAPI
 
-Este documento fornece as instruções para gerar a imagem Docker para a aplicação **JubileuTaskListAPI** a partir do **Dockerfile**.
+Este documento fornece as instruções para gerar a imagem Docker para a aplicação **NexoTaskAPI** a partir do **Dockerfile**.
 
 ## Pré-requisitos
 
@@ -15,7 +15,9 @@ Este documento fornece as instruções para gerar a imagem Docker para a aplica�
 Abra o terminal e navegue até o diretório onde o `Dockerfile e docker-compose.yml` está localizado. No seu, execute:
 
 ```bash
-cd .\JubileuTaskListAPI
+cd .\GitHub
+
+cd .\nexo-task-api
 ```
 
 ### 2. Execute o Comando para Construir a Imagem
@@ -41,7 +43,7 @@ Após a execução do comando acima, você pode verificar se a imagem foi criada
 docker images
 ```
 
-Isso irá listar todas as imagens Docker no seu sistema. A imagem `jubileutasklistapi-api` e `postgres` deve aparecer na lista.
+Isso irá listar todas as imagens Docker no seu sistema. A imagem `nexotaskapi-api` e `postgres` deve aparecer na lista.
 
 ## Executando o Container Docker
 
@@ -50,7 +52,7 @@ Depois de gerar a imagem, você pode rodar o container a partir dela com o segui
 ```bash
 docker run -d -p 127.0.0.1:5432:5432 --name postgres-container postgres
 
-docker run -d -p 127.0.0.1:5050:5050 --name jubilee-api --link postgres-container:postgres jubileu-api
+docker run -d -p 127.0.0.1:5050:5050 --name nexo-api --link postgres-container:postgres nexotask-api
 ```
 
-Isso vai rodar o container e mapear a porta 5050 do container para a porta 5050 da sua máquina local, tornando a aplicação acessível.
+Isso vai rodar o container e mapear a porta 3001/front e 3002/back do container para a porta 3001/front e 3002/back da sua máquina local, tornando a aplicação acessível.
