@@ -32,10 +32,17 @@ export class UpdateTaskController {
     private static extractTaskData(body: any): Partial<UpdateTaskDTO> {
         const { titulo, descricao, dataPrevista, prioridade, status, cor } = body;
         const taskData: Partial<UpdateTaskDTO> = {};
+        
+        const [datePart] = dataPrevista.split(","); 
+        // const [day, month, year] = datePart.split("/").map(Number);
+
+        // const dataPrevistaDate = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
 
         if (titulo !== undefined) taskData.titulo = titulo;
         if (descricao !== undefined) taskData.descricao = descricao;
-        if (dataPrevista !== undefined) taskData.dataPrevista = dataPrevista;
+        if (dataPrevista !== undefined) taskData.dataPrevista = new Date(dataPrevista);
         if (prioridade !== undefined) taskData.prioridade = prioridade;
         if (status !== undefined) taskData.status = status;
         if (cor !== undefined) taskData.cor = cor;
