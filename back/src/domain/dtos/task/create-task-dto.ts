@@ -6,6 +6,7 @@ export type CreateTaskDTO = {
     status: boolean;
     usuarioId: number;
     dataPrevista: Date;
-    prioridade: Prioridade; 
+    prioridade: Prioridade;
+    cor?: string | null;
 };
   

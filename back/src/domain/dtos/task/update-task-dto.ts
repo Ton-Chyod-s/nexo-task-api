@@ -6,4 +6,5 @@ export class UpdateTaskDTO {
     dataPrevista?: Date;
     prioridade?: Prioridade;
     status?: boolean;
+    cor?: string;
 }

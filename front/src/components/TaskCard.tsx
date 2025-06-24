@@ -19,6 +19,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   const [dataPrevista, setDataPrevista] = useState(() =>
     new Date().toISOString().split("T")[0]
   ); 
+  const [cor] = useState("bg-white");
 
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       dataPrevista,
       prioridade,
       status: starTouched ? starOn : false,
+      cor,
     };
 
     try {
@@ -122,7 +124,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
 
         <input
           type="text"
-          placeholder="Descrição da tarefa"
+          placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none"

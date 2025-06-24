@@ -11,8 +11,9 @@ type TaskItemCardProps = {
   body?: string;
   onDelete?: () => void;
   onStatusChange?: (newStatus: boolean) => void;
-  priority?: "Alta" | "Média" | "Baixa";
-  date?: string; // Ex: '2025-06-24 07:00'
+  priority?: "ALTA" | "MEDIA" | "BAIXA";
+  date?: string;
+  onColorChange?: (color: string) => void;
 };
 
 const fetchDeleteTask = async (id: string, token: string) => {
@@ -43,10 +44,40 @@ export default function TaskItemCard({
   onDelete,
   onStatusChange,
   priority,
-  date
+  date,
+  onColorChange
 }: TaskItemCardProps) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState(title);
+  const [editBody, setEditBody] = useState(body || "");
+  const [editPriority, setEditPriority] = useState<"ALTA" | "MEDIA" | "BAIXA">(priority ?? "BAIXA");
+  const [editDate, setEditDate] = useState(date || "");
+
+  const handleUpdate = async () => {
+    try {
+      const response = await fetch(`http://localhost:3002/task/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          titulo: editTitle,
+          descricao: editBody,
+          prioridade: editPriority,
+          dataPrevista: editDate,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao atualizar a tarefa");
+
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Erro ao atualizar a tarefa:", error);
+    }
+  };
 
   useEffect(() => {
     if (!token) {
@@ -84,9 +115,17 @@ export default function TaskItemCard({
         className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor}`}
       >
         <header className="flex justify-between items-center mb-3">
-          <p className="flex-grow bg-transparent text-lg font-bold border-b border-gray-300 pb-1">
-            {title}
-          </p>
+          {isEditing ? (
+            <input
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              className="flex-grow text-lg font-bold border-b border-gray-300 pb-1 bg-white rounded px-2"
+            />
+          ) : (
+            <p className="flex-grow bg-transparent text-lg font-bold border-b border-gray-300 pb-1">
+              {editTitle}
+            </p>
+          )}
           <button
             type="button"
             onClick={handleToggleStar}
@@ -100,38 +139,98 @@ export default function TaskItemCard({
           </button>
         </header>
 
-        <p className="text-sm text-gray-600 mb-4 pb-44">
-          {body || "Nenhuma descrição fornecida."}
-        </p>
+        {isEditing ? (
+          <textarea
+            value={editBody}
+            onChange={(e) => setEditBody(e.target.value)}
+            className="w-full text-sm text-gray-600 mb-4 p-2 border rounded bg-white"
+          />
+        ) : (
+          <p className="text-sm text-gray-600 mb-4 pb-44">
+            {editBody || "Nenhuma descrição fornecida."}
+          </p>
+        )}
 
         <footer className="flex justify-between items-center mt-6 text-sm">
-        <div className="flex gap-3 items-center">
-          <button title="Editar">
-            <Pencil className="w-5 h-5 text-gray-600" />
-          </button>
-          <button title="Cor" onClick={() => setIsModalOpen(true)}>
-            <Droplet className="w-5 h-5 text-gray-600" />
-          </button>
-        </div>
-
-        <div className="flex flex-col items-end text-[11px] text-gray-500">
-          <div className="flex gap-3">
-            <span className="flex items-center gap-1">
-              <Flag className="w-4 h-4" />
-              <span className="font-medium">{priority}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              <span>{date}</span>
-            </span>
+          <div className="flex gap-3 items-center">
+            <button title="Editar" onClick={() => setIsEditing(true)}>
+              <Pencil className="w-5 h-5 text-gray-600" />
+            </button>
+            <button title="Cor" onClick={() => setIsModalOpen(true)}>
+              <Droplet className="w-5 h-5 text-gray-600" />
+            </button>
           </div>
-        </div>
 
-        <button title="Excluir" onClick={handleDelete}>
-          <X className="w-5 h-5 text-gray-600" />
-        </button>
-      </footer>
+          <div className="flex flex-col items-end text-[11px] text-gray-500">
+            <div className="flex gap-3">
+              <span className="flex items-center gap-1">
+                <Flag
+                  className="w-5 h-5"
+                  color={
+                    priority === "ALTA"
+                      ? "red"
+                      : priority === "MEDIA"
+                      ? "orange"
+                      : "green"
+                  }
+                />
+                {isEditing ? (
+                  <select
+                    value={editPriority}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === "ALTA" || value === "MEDIA" || value === "BAIXA") {
+                        setEditPriority(value);
+                      }
+                    }}
+                    className="border rounded px-1 py-[2px]"
+                  >
+                    <option value="ALTA">ALTA</option>
+                    <option value="MEDIA">MÉDIA</option>
+                    <option value="BAIXA">BAIXA</option>
+                  </select>
+                ) : (
+                  <span className="font-medium">{editPriority}</span>
+                )}
+              </span>
 
+              <span className="flex items-center gap-1">
+                <Calendar className="w-5 h-5" />
+                {isEditing ? (
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(e) => setEditDate(e.target.value)}
+                    className="border rounded px-1 py-[2px]"
+                  />
+                ) : (
+                  <span>{editDate}</span>
+                )}
+              </span>
+            </div>
+          </div>
+
+          <button title="Excluir" onClick={handleDelete}>
+            <X className="w-5 h-5 text-gray-600" />
+          </button>
+        </footer>
+
+        {isEditing && (
+          <div className="mt-3 flex gap-2 justify-end">
+            <button
+              onClick={handleUpdate}
+              className="text-sm text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
+            >
+              Salvar
+            </button>
+            <button
+              onClick={() => setIsEditing(false)}
+              className="text-sm text-gray-500 border border-gray-300 px-3 py-1 rounded hover:bg-gray-100"
+            >
+              Cancelar
+            </button>
+          </div>
+        )}
       </div>
 
       {isModalOpen && (
@@ -139,8 +238,10 @@ export default function TaskItemCard({
           onClose={() => setIsModalOpen(false)}
           onSelect={(color) => {
             setCardColor(color);
+            onColorChange?.(color);
             setIsModalOpen(false);
           }}
+          id={Number(id)}
         />
       )}
     </>
