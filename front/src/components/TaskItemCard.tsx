@@ -132,7 +132,11 @@ export default function TaskItemCard({
         className={`rounded-[2rem] shadow-md p-4 w-full max-w-sm ${cardColor} flex flex-col min-h-[300px]`}
       >
         <div className="flex-grow">
-          <header className="flex justify-between items-center mb-3 border-b border-gray-300 pb-1">
+          <header
+            className={`flex justify-between items-center mb-3 pb-1 border-b ${
+              color ? "border-gray-400" : "border-gray-300"
+            }`}
+          >
             {isEditing ? (
               <input
                 value={editTitle}
