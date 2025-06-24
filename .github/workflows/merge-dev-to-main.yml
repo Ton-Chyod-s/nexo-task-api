@@ -1,4 +1,4 @@
-name: Test PRs
+name: CI Pipeline
 
 on:
   pull_request:
@@ -6,36 +6,70 @@ on:
       - main
 
 permissions:
+  contents: read
   pull-requests: write
-  contents: write
 
 jobs:
-  test:
+  backend:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+      JWT_SECRET: srecretkey
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22.14.0 
+          node-version: 20
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./back
 
-      - name: Set DATABASE_URL for SQLite
-        run: echo "DATABASE_URL=sqlite:./prisma/dev.db" >> $GITHUB_ENV
+      - name: Generate Prisma client
+        run: npx prisma generate
+        working-directory: ./back
 
-      - name: Generate Prisma Client
-        run: npx prisma generate --schema=prisma/schema.dev.prisma
+      - name: Run migrations
+        run: npx prisma migrate deploy
+        working-directory: ./back
 
-      - name: Run migrations (this will create the migration)
-        run: npx prisma migrate dev --name init --schema=prisma/schema.dev.prisma
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Run tests
+      - name: Run backend tests
         run: npm test
+        working-directory: ./back
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./front
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./front
