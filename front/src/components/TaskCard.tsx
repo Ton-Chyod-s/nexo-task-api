@@ -124,7 +124,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
 
         <input
           type="text"
-          placeholder="Descrição da tarefa"
+          placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none"
