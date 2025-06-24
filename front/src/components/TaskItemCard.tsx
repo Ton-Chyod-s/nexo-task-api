@@ -11,8 +11,8 @@ type TaskItemCardProps = {
   body?: string;
   onDelete?: () => void;
   onStatusChange?: (newStatus: boolean) => void;
-  priority?: "Alta" | "Média" | "Baixa";
-  date?: string; 
+  priority?: "ALTA" | "MEDIA" | "BAIXA";
+  date?: string;
   onColorChange?: (color: string) => void;
 };
 
@@ -79,6 +79,7 @@ export default function TaskItemCard({
     onStatusChange?.(newStatus);
   };
 
+  
   return (
     <>
       <div
@@ -119,11 +120,20 @@ export default function TaskItemCard({
         <div className="flex flex-col items-end text-[11px] text-gray-500">
           <div className="flex gap-3">
             <span className="flex items-center gap-1">
-              <Flag className="w-4 h-4" />
+              <Flag
+              className="w-5 h-5"
+              color={
+                priority === "ALTA"
+                  ? "red"
+                  : priority === "MEDIA"
+                  ? "orange"
+                  : "green"
+              }
+            />
               <span className="font-medium">{priority}</span>
             </span>
-            <span className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
+            <span className="flex items-center gap-1" >
+              <Calendar className="w-5 h-5" />
               <span>{date}</span>
             </span>
           </div>
