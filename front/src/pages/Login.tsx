@@ -30,7 +30,8 @@ export default function Login() {
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.message || "Erro no login");
+          window.alert(error.message || "Erro no login");
+          return;
         }
 
         const data = await response.json();
@@ -42,7 +43,6 @@ export default function Login() {
 
       } catch (error) {
         console.error("Erro ao fazer login:", error);
-        window.alert("Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.");
       }
     }
 

@@ -43,7 +43,8 @@ export default function Register() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || "Erro no cadastro");
+        window.alert(error.message || "Erro no cadastro");
+        return;
       }
 
       const data = await response.json();
