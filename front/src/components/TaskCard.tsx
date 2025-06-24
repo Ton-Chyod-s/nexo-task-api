@@ -75,7 +75,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
   }
 
   function handleDescriptionChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    const maxCharsPerLine = 46;
+    const maxCharsPerLine = 48;
     const value = e.target.value;
 
     const lines = value.split("\n");
@@ -143,7 +143,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
           value={description}
           onChange={handleDescriptionChange}
           className="w-full pl-5 text-xl font-semibold focus:border-blue-600 outline-none resize-none whitespace-pre-wrap break-words"
-          rows={1}
+          rows={5}
         />
 
         <div className="flex justify-center items-center gap-4 mt-4 text-sm text-gray-600">
