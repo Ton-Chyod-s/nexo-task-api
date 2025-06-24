@@ -1,4 +1,4 @@
-# Projeto NexoTask API
+# NexoTask Backend
 
 Este projeto é uma API responsável pela gestão de tarefas, incluindo funcionalidades de CRUD e autenticação de usuários. Ele utiliza Node.js com TypeScript, Prisma para comunicação com o banco de dados, e JWT para autenticação.
 
