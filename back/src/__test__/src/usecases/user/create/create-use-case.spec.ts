@@ -23,7 +23,7 @@ describe('CreateUseCase', () => {
 
     await expect(() => createUseCase.execute(mockUser))
       .rejects
-      .toThrowError('E-mail already registered');
+      .toThrowError('Ops! Esse e-mail já foi registrado por outro usuário.');
   });
 
   it('deve lançar erro se o repositório falhar ao criar o usuário', async () => {
@@ -43,6 +43,6 @@ describe('CreateUseCase', () => {
 
     await expect(() => createUseCase.execute(userInvalido))
       .rejects
-      .toThrowError('E-mail required');
+      .toThrowError('O campo e-mail é obrigatório.');
   });
 });
