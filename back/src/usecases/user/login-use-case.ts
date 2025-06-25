@@ -12,13 +12,18 @@ export class LoginUseCase {
     async execute(email: string, password: string): Promise<LoginResponseDTO | null> {
         const user = await this.userRepository.findByEmail(email);
 
-        if (!user) return null;
+        if (!user) {
+            throw new Error("Ops! Esse usuário não existe em nosso sistema.");
+        }
 
         const passwordMatches = await bcrypt.compare(password, user.passwordHash);
-        if (!passwordMatches) return null;
+
+        if (!passwordMatches) {
+            throw new Error("A senha que você digitou está incorreta.");
+        }
 
         if (!user.id) {
-            throw new Error("User account is inactive");
+            throw new Error("Essa conta existe, mas está desativada no sistema.");
         }
         
         const token = this.authService.generateToken(user.id.toString());

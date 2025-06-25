@@ -7,17 +7,12 @@ export class CreateUseCase {
     async execute(user: User): Promise<User> {
 
         if (!user.email) {
-            throw new Error('E-mail required');
+            throw new Error('O campo e-mail é obrigatório.');
         }
         
         const existingByEmail = await this.userRepository.findByEmail(user.email);
         if (existingByEmail) {
-            throw new Error('E-mail already registered');
-        }
-
-        const existingByName = await this.userRepository.findByName(user.nome);
-        if (existingByName) {
-            throw new Error('Name already registered');
+            throw new Error('Ops! Esse e-mail já foi registrado por outro usuário.');
         }
 
         return await this.userRepository.create(user);
