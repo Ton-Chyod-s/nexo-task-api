@@ -16,6 +16,7 @@ export class LoginController {
 
         try {
             const result = await this.loginUseCase.execute(email, senha);
+            
 
             if (!result) {
                 return res.status(401).json({ message: "Invalid credentials" });
@@ -31,7 +32,7 @@ export class LoginController {
                 token: result.token
             });
         } catch (error: any) {
-            return res.status(500).json({ message: "Internal server error", error: error.message });
+            return res.status(500).json({ message: error.message });
         }
     }
 }
