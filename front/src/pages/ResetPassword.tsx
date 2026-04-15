@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
+import { API_URL } from "../utils/api";
 
 export default function RedefinirSenha() {
   const [form, setForm] = useState({ password: "", confirmPassword: "" });
@@ -9,7 +10,7 @@ export default function RedefinirSenha() {
 
   const resetPassword = async (newPassword: string, token: string) => {
     try {
-      await fetch("http://localhost:3002/reset-password", {
+      await fetch(`${API_URL}/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

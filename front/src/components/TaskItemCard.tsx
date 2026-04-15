@@ -1,6 +1,7 @@
   import { useState, useEffect } from "react";
   import { X, Pencil, Droplet, Star, StarOff, Flag, Calendar } from "lucide-react";
   import ColorPickerModal from "../components/ColorPickerModal";
+  import { API_URL } from "../utils/api";
   import { useNavigate } from "react-router-dom";
   import { formatDateToBR } from "../utils/FormatDate";
 
@@ -24,7 +25,7 @@
     const numericId = Number(id);
     if (isNaN(numericId)) throw new Error("ID inválido");
 
-    const response = await fetch(`http://localhost:3002/task/${numericId}`, {
+    const response = await fetch(`${API_URL}/task/${numericId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +62,7 @@
 
     const handleUpdate = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/task/${id}`, {
+        const response = await fetch(`${API_URL}/task/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

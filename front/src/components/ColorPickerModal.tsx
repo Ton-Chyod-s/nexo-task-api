@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { API_URL } from "../utils/api";
 
 type Props = {
   onClose: () => void;
@@ -27,7 +28,7 @@ export default function ColorPickerModal({ onClose, onSelect, id }: Props) {
 
   async function updateTaskColor(color: string) {
     try {
-      const data = await fetch(`http://localhost:3002/task/${id}`, {
+      const data = await fetch(`${API_URL}/task/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

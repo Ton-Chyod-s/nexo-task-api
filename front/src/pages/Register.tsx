@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputField from "../components/InputField";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/api";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
@@ -28,7 +29,7 @@ export default function Register() {
 
   async function fetchRegister() {
     try {
-      const response = await fetch("http://localhost:3002/register", {
+      const response = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

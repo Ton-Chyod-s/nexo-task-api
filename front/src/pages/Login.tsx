@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputField from "../components/InputField";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/api";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", senha: "" });
@@ -20,7 +21,7 @@ export default function Login() {
 
     async function fetchLogin() {
       try {
-        const response = await fetch("http://localhost:3002/login", {
+        const response = await fetch(`${API_URL}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

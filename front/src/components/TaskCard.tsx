@@ -1,6 +1,7 @@
 import { Star, StarOff, Flag, Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/api";
 
 function getLocalDateString() {
   const hoje = new Date();
@@ -49,7 +50,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
     };
 
     try {
-      const response = await fetch("http://localhost:3002/tasks", {
+      const response = await fetch(`${API_URL}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

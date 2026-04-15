@@ -1,6 +1,7 @@
 import SearchHeader from "./../components/SearchHeader";
 import TaskCard from "./../components/TaskCard";
 import TaskItemCard from "../components/TaskItemCard";
+import { API_URL } from "../utils/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -53,7 +54,7 @@ export default function Dashboard() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3002/task/${id}`, {
+      const response = await fetch(`${API_URL}/task/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +87,7 @@ export default function Dashboard() {
     }
 
     try {
-      const response = await fetch("http://localhost:3002/tasks", {
+      const response = await fetch(`${API_URL}/tasks`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

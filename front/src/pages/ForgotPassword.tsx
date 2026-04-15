@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputField from "../components/InputField";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/api";
 
 export default function ForgotPassword() {
     const [form, setForm] = useState({ email: "" });
@@ -20,7 +21,7 @@ export default function ForgotPassword() {
 
         async function fetchForgotPassword() {
             try {
-                const response = await fetch("http://localhost:3002/forgot-password", {
+                const response = await fetch(`${API_URL}/forgot-password`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
