@@ -1,4 +1,4 @@
-app = "nexo-task-api"
+app = "nexotask-ton"
 primary_region = "gru"
 
 [build]
