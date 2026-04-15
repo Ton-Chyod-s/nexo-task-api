@@ -11,7 +11,10 @@ const port = process.env.PORT || 3002;
 const server = express();
 const PORT = port;
 
-server.use(cors());
+server.use(cors({
+    origin: process.env.CORS_ORIGIN || '*',
+    credentials: true,
+}));
 server.use(express.json());
 server.use(router);
 
