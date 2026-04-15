@@ -1,82 +1,79 @@
-# NexoTask Frontend
+# NexoTask – Frontend
 
-Interface web para o sistema de gerenciamento de tarefas NexoTask. Este projeto consome a [API NexoTask](https://github.com/Ton-Chyod-s/nexo-task-api/tree/main/back) e foi desenvolvido com **React + TypeScript**, utilizando **Vite** e **Tailwind CSS** para uma UI leve, responsiva e moderna.
+Interface web para o sistema de gerenciamento de tarefas NexoTask. Consome a [API NexoTask](../back) e foi desenvolvida com **React + TypeScript**, **Vite** e **Tailwind CSS**.
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias
 
-- **React + TypeScript** – para uma interface robusta e tipada.
-- **Vite** – empacotador moderno com build rápido e ambiente de desenvolvimento otimizado.
-- **Tailwind CSS** – estilização utilitária para uma UI limpa e responsiva.
-- **React Router** – gerenciamento de rotas de forma simples e declarativa.
-- **Lucide React** – ícones modernos e leves.
-- **fetch** – para consumo da API backend.
+- **React + TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **React Router**
+- **Lucide React**
+- **Vercel** (produção)
 
 ---
 
 ## Funcionalidades
 
-- Cadastro e login de usuários com integração à API.
-- Recuperação e redefinição de senha via e-mail.
-- Criação, edição, exclusão e visualização de tarefas.
-- Marcação de tarefas favoritas.
-- Interface responsiva com tema limpo e intuitivo.
-- Integração com backend via requisições REST.
+- Cadastro e login de usuários
+- Recuperação e redefinição de senha por e-mail
+- Criação, edição, exclusão e visualização de tarefas
+- Filtros por cor, prioridade e data
+- Marcação de tarefas favoritas
+- Seleção de cor por tarefa
+- Interface responsiva
 
 ---
 
-## Como rodar localmente
+## Instalação Local
 
-1. **Clone o projeto**
-
-```bash
-git clone https://github.com/Ton-Chyod-s/nexo-task-api/tree/dev/front.git
-cd nexo-task-api
-```
-
-2. **Instale as dependência**
-   
 ```bash
 npm install
-```
-
-3. Configure as variáveis de ambiente
-   
-```bash
-VITE_PORT=3001
-```
-
-4. Rode o projeto
-
-```bash
 npm run dev
 ```
 
-5. Rode o tailwind para desenvolvimento
+A aplicação estará disponível em `http://localhost:3001`
 
-```bash
-npm run dev:css
+### Variáveis de Ambiente
+
+Crie um arquivo `.env` em `front/`:
+
+```env
+VITE_PORT=3001
+VITE_API_URL=http://localhost:5050
 ```
 
-A aplicação estará disponível em http://localhost:3001
+> Em produção (Vercel), defina `VITE_API_URL` com a URL do backend no Fly.io.
 
-## Estrutura do Projeto
+---
 
-```text
-front/
-├── public/              # Arquivos estáticos
-├── src/
-│   ├── assets/          # Imagens e estilos
-│   ├── components/      # Componentes reutilizáveis
-│   ├── pages/           # Páginas da aplicação
-│   ├── routes/          # Gerenciamento de rotas
-│   └── main.tsx         # Ponto de entrada do app
-├── index.html
-├── vite.config.ts
-└── tailwind.config.js
+## Estrutura
+
 ```
+src/
+├── assets/        # Estilos e imagens
+├── components/    # Componentes reutilizáveis
+├── pages/         # Páginas (Login, Register, Dashboard, etc.)
+├── routes/        # Configuração de rotas
+└── utils/
+    ├── api.ts     # URL base da API (via VITE_API_URL)
+    └── FormatDate.ts
+```
+
+---
+
+## Deploy (Vercel)
+
+Conecte o repositório no [Vercel](https://vercel.com), defina o diretório raiz como `front/` e adicione a variável de ambiente:
+
+```env
+VITE_API_URL=https://<seu-app>.fly.dev
+```
+
+---
 
 ## Licença
 
-Este projeto está licenciado sob a MIT license.
+MIT
